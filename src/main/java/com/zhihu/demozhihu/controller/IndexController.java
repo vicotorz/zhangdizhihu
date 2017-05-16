@@ -25,38 +25,44 @@ public class IndexController {
         return "Hello Controller";
     }
 
+    @RequestMapping(path = {"/profile/{userID}"})
+    @ResponseBody
+    public String profile(@PathVariable("userID") String id, @RequestParam(value = "key", defaultValue = "defaultVaule") String key,@RequestParam(value="type", defaultValue="defaultVaule") String type) {
+        return "The page of" + id+" key:"+key+" value:"+type;
+    }
+
 
     @RequestMapping(path = {"/request"})
     @ResponseBody
     public String request(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-        StringBuffer sb=new StringBuffer();
-        sb.append(request.getMethod()+"<br>");
-        sb.append(request.getQueryString()+"<br>");
-        sb.append(request.getPathInfo()+"<br>");
-        sb.append(request.getRequestURI()+"<br>");
+        StringBuffer sb = new StringBuffer();
+        sb.append(request.getMethod() + "<br>");
+        sb.append(request.getQueryString() + "<br>");
+        sb.append(request.getPathInfo() + "<br>");
+        sb.append(request.getRequestURI() + "<br>");
 
 
-        Enumeration<String> headerNames=request.getHeaderNames();
-        while(headerNames.hasMoreElements()){
-            String name=headerNames.nextElement();
-            sb.append(name+":"+request.getHeader(name)+"<br>");
+        Enumeration<String> headerNames = request.getHeaderNames();
+        while (headerNames.hasMoreElements()) {
+            String name = headerNames.nextElement();
+            sb.append(name + ":" + request.getHeader(name) + "<br>");
         }
 
         //cookie
-        if(request.getCookies()!=null){
-            for(Cookie cookie:request.getCookies()){
-                sb.append("Cookie:"+cookie.getName()+"Cookie value:"+cookie.getValue());
+        if (request.getCookies() != null) {
+            for (Cookie cookie : request.getCookies()) {
+                sb.append("Cookie:" + cookie.getName() + "Cookie value:" + cookie.getValue());
             }
         }
         return sb.toString();
     }
 
-    @RequestMapping(path="/watch")
+    @RequestMapping(path = "/watch")
     @ResponseBody
-    public String watch_cookie(@CookieValue("JSESSIONID") String id,HttpServletResponse response){
-        StringBuffer sb=new StringBuffer();
-        sb.append(id+"<br>");
-        response.addHeader("nowcoder","hello");
+    public String watch_cookie(@CookieValue("JSESSIONID") String id, HttpServletResponse response) {
+        StringBuffer sb = new StringBuffer();
+        sb.append(id + "<br>");
+        response.addHeader("nowcoder", "hello");
         return sb.toString();
     }
 
@@ -80,37 +86,34 @@ public class IndexController {
         return "Home";//返回Home的模版
     }
 
-    @RequestMapping(path="/redirect/{code}")
-    public String redirect(@PathVariable("code") int code){
+    @RequestMapping(path = "/redirect/{code}")
+    public String redirect(@PathVariable("code") int code) {
         return "redirect:/";
     }
 
-    @RequestMapping(path="/red/{code}")
-    public RedirectView red(@PathVariable("code") int code,HttpSession httpSession){
-        RedirectView  redirectView=new RedirectView("/",true);
-        httpSession.setAttribute("msg","jump from red function");
-        if(code==301){
+    @RequestMapping(path = "/red/{code}")
+    public RedirectView red(@PathVariable("code") int code, HttpSession httpSession) {
+        RedirectView redirectView = new RedirectView("/", true);
+        httpSession.setAttribute("msg", "jump from red function");
+        if (code == 301) {
             redirectView.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
         }
         return redirectView;
     }
 
-
-
-    @RequestMapping(path="/admin",method = {RequestMethod.GET})
+    @RequestMapping(path = "/admin", method = {RequestMethod.GET})
     @ResponseBody
-    public String admin(@RequestParam("key") String key){
-        if("admin".equals(key)){
+    public String admin(@RequestParam("key") String key) {
+        if ("admin".equals(key)) {
             return "hello admin";
-        }else{
-           throw new IllegalArgumentException("不是admin，发生故障！");
+        } else {
+            throw new IllegalArgumentException("不是admin，发生故障！");
         }
     }
 
     @ExceptionHandler
     @ResponseBody
-    public String error(Exception e){
-        return "error"+e.getMessage();
+    public String error(Exception e) {
+        return "error" + e.getMessage();
     }
-
 }
