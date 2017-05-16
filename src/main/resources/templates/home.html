@@ -1,0 +1,56 @@
+<br xmlns="http://www.w3.org/1999/html">
+<br>
+Hello Velocity
+
+$!{value1}
+</br>
+colors:$!{colors}
+</br>
+
+#foreach($color in $colors)
+This color is : $color,$!{foreach.index}, $!{foreach.count}
+</br>
+#end
+</br>
+
+
+#foreach($key in $map.keySet())
+Key:$!{key}-----Value:$map.get($key)
+</br>
+#end
+</br>
+
+$!{user.name}
+$!{user.getPassword()}
+
+<!--设置变量-->
+#set($varible="这是变量")
+Varible:$!{varible}
+
+#parse("header.html")
+#include("tail.html")
+
+<!--宏定义-->
+#macro(render_color,$index,$color)
+Color Render Macro $index,$color
+#end
+<!--宏调用-->
+#foreach($color in $colors)
+#render_color($foreach.index,$color)
+#end
+
+#*
+注释而已
+*#
+
+#set($hello="hello")
+#set($helloworld1="$!{hello} world")
+$!hello
+$helloworld1
+
+
+
+
+
+</body>
+</html>
