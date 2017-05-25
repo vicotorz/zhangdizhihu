@@ -35,7 +35,7 @@ public class HomeController {
             vo.set("user", userService.getUser(question.getUserId()));
             vos.add(vo);
         }
-        model.addAttribute("question", vos);
+        model.addAttribute("vos", vos);
         return "index";
     }
 
