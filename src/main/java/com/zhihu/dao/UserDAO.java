@@ -2,6 +2,7 @@ package com.zhihu.dao;
 
 import com.zhihu.model.User;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by dell on 2017/5/20.
@@ -21,5 +22,9 @@ public interface UserDAO {
 
     @Delete({"delete user where id=#{id}"})
     void deleteById(int id);
+
+    @Select({"select * from user where name=#{name}"})
+    User selectByName(String name);
+
 
 }
