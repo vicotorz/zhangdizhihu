@@ -1,6 +1,7 @@
 package com.zhihu.service;
 
 import com.zhihu.dao.QuestionDAO;
+import com.zhihu.model.HostHolder;
 import com.zhihu.model.Question;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,13 +15,16 @@ import java.util.List;
  * Created by dell on 2017/5/23.
  */
 @Service
-public class QuestionService {
-    private static final Logger logger = LoggerFactory.getLogger(QuestionService.class);
+public class MessageService {
+    private static final Logger logger = LoggerFactory.getLogger(MessageService.class);
     @Autowired
     QuestionDAO questionDao;
 
     @Autowired
     SensetiveService senService;
+
+    @Autowired
+    HostHolder hostHolder;
 
     public List getLatestQuestions(int userId, int offset, int limit) {
         return questionDao.selectLatestQuestions(userId, offset, limit);
@@ -33,21 +37,5 @@ public class QuestionService {
         //过滤敏感词
         question.setContent(senService.filter(question.getContent()));
         return questionDao.addQuestion(question) > 0 ? question.getId() : 0;
-    }
-
-    //获得数目
-    public int getCommentCount(int questionid){
-        return questionDao.getCommentCount(questionid);
-    }
-
-    //增加评论数目
-    public void increaseCommentCount(int count,int questionid){
-        questionDao.IncreaceCommentCount(count+1,questionid);
-    }
-
-
-    //返回question
-    public Question getById(int id){
-        return questionDao.select(id);
     }
 }

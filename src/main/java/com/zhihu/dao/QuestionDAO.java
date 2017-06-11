@@ -19,12 +19,19 @@ public interface QuestionDAO {
     int addQuestion(Question question);
 
     @Select({"select * from question where id=#{id}"})
-    Question select(int id);
+    Question select(@Param("id") int id);
 
     @Update({"update question set title=#{title} where id=#{id}"})
     void updateTitle(Question question);
 
     @Delete({"delete question where id=#{id}"})
-    void deleteById(int id);
+    void deleteById(@Param("id") int id);
+
+    @Select({"select comment_count from question where id=#{questionid}"})
+    int getCommentCount(@Param("questionid") int questionid);
+
+    @Select({"update question set comment_count=comment_count+1 where id=#{questionid}"})
+    void IncreaceCommentCount(@Param("comment_count") int comment_count, @Param("questionid") int questionid);
+
 
 }

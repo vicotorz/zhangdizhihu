@@ -1,9 +1,8 @@
 package com.zhihu.controller;
 
 import com.zhihu.Utils.JsonUtil;
-import com.zhihu.model.HostHolder;
-import com.zhihu.model.Question;
-import com.zhihu.model.ViewObject;
+import com.zhihu.model.*;
+import com.zhihu.service.CommentService;
 import com.zhihu.service.QuestionService;
 import com.zhihu.service.UserService;
 import org.slf4j.Logger;
@@ -25,7 +24,13 @@ public class QuestionController {
     private static final Logger logger = LoggerFactory.getLogger(QuestionController.class);
 
     @Autowired
-    QuestionService questionservice;
+    QuestionService questionService;
+
+    @Autowired
+    CommentService commentService;
+
+    @Autowired
+    UserService userService;
 
     @Autowired
     HostHolder hostholeder;//上下文存入用户
@@ -49,7 +54,7 @@ public class QuestionController {
                 question.setUserId(hostholeder.getUser().getId());
             }
 
-            if (questionservice.addQuestion(question) > 0) {
+            if (questionService.addQuestion(question) > 0) {
                 //成功
                 return JsonUtil.getJSONString(0);
             }
@@ -57,5 +62,23 @@ public class QuestionController {
             logger.error("增加题目失败" + e.getMessage());
         }
         return JsonUtil.getJSONString(1, "增加失败");
+    }
+
+    @RequestMapping(value = "/question/{qid}", method = {RequestMethod.GET})
+    public String questionDetail(Model model, @PathVariable("qid") int qid) {
+        Question question = questionService.getById(qid);
+        model.addAttribute("question", question);
+        System.out.println("@@@%%%%%%"+qid+"%%%%%%%%%%%");
+        List<Comment> commentList = commentService.getCommentsByEntity(qid, EntityType.ENTITY_QUESTION);
+        List<ViewObject> vos = new ArrayList<>();
+        for (Comment comment : commentList) {
+            ViewObject vo = new ViewObject();
+            vo.set("comment", comment);
+            vo.set("user", userService.getUser(comment.getUser_id()));
+            vos.add(vo);
+        }
+        model.addAttribute("comments", vos);
+
+        return "detail";
     }
 }
