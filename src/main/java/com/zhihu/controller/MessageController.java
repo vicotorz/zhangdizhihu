@@ -1,3 +1,4 @@
+import com.zhihu.Utils.JsonUtil;
 import com.zhihu.model.HostHolder;
 import com.zhihu.model.Message;
 import com.zhihu.model.User;
@@ -44,10 +45,10 @@ public class MessageController {
             for (Message msg : conversationList) {
                 ViewObject vo = new ViewObject();
                 vo.set("conversation", msg);
-                int targetId = msg.getFromId() == localUserId ? msg.getToId() : msg.getFromId();
+                int targetId = msg.getFrom_id() == localUserId ? msg.getTo_id() : msg.getFrom_id();
                 User user = userService.getUser(targetId);
                 vo.set("user", user);
-                vo.set("unread", messageService.getConvesationUnreadCount(localUserId, msg.getConversationId()));
+                vo.set("unread", messageService.getConvesationUnreadCount(localUserId, msg.getConversation_id()));
                 conversations.add(vo);
             }
             model.addAttribute("conversations", conversations);
@@ -65,7 +66,7 @@ public class MessageController {
             for (Message msg : conversationList) {
                 ViewObject vo = new ViewObject();
                 vo.set("message", msg);
-                User user = userService.getUser(msg.getFromId());
+                User user = userService.getUser(msg.getFrom_id());
                 if (user == null) {
                     continue;
                 }
@@ -87,24 +88,24 @@ public class MessageController {
                              @RequestParam("content") String content) {
         try {
             if (hostHolder.getUser() == null) {
-                return Utils.getJSONString(999, "未登录");
+                return JsonUtil.getJSONString(999, "未登录");
             }
-            User user = userService.selectByName(toName);
+            User user = userService.getUserByName(toName);
             if (user == null) {
-                return Utils.getJSONString(1, "用户不存在");
+                return JsonUtil.getJSONString(1, "用户不存在");
             }
 
             Message msg = new Message();
             msg.setContent(content);
-            msg.setFromId(hostHolder.getUser().getId());
-            msg.setToId(user.getId());
-            msg.setCreatedDate(new Date());
+            msg.setFrom_id(hostHolder.getUser().getId());
+            msg.setTo_id(user.getId());
+            msg.setCreated_date(new Date());
             //msg.setConversationId(fromId < toId ? String.format("%d_%d", fromId, toId) : String.format("%d_%d", toId, fromId));
             messageService.addMessage(msg);
-            return WendaUtil.getJSONString(0);
+            return JsonUtil.getJSONString(0);
         } catch (Exception e) {
             logger.error("增加站内信失败" + e.getMessage());
-            return WendaUtil.getJSONString(1, "插入站内信失败");
+            return JsonUtil.getJSONString(1, "插入站内信失败");
         }
     }
 
@@ -117,15 +118,15 @@ public class MessageController {
         try {
             Message msg = new Message();
             msg.setContent(content);
-            msg.setFromId(fromId);
-            msg.setToId(toId);
-            msg.setCreatedDate(new Date());
+            msg.setFrom_id(fromId);
+            msg.setTo_id(toId);
+            msg.setCreated_date(new Date());
             //msg.setConversationId(fromId < toId ? String.format("%d_%d", fromId, toId) : String.format("%d_%d", toId, fromId));
             messageService.addMessage(msg);
-            return WendaUtil.getJSONString(msg.getId());
+            return JsonUtil.getJSONString(msg.getId());
         } catch (Exception e) {
             logger.error("增加评论失败" + e.getMessage());
-            return WendaUtil.getJSONString(1, "插入评论失败");
+            return JsonUtil.getJSONString(1, "插入评论失败");
         }
     }
 }
