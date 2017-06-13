@@ -1,3 +1,6 @@
+package com.zhihu.controller;
+
+
 import com.zhihu.Utils.JsonUtil;
 import com.zhihu.model.HostHolder;
 import com.zhihu.model.Message;
@@ -38,6 +41,7 @@ public class MessageController {
 
     @RequestMapping(path = {"/msg/list"}, method = {RequestMethod.GET})
     public String conversationDetail(Model model) {
+        System.out.println("conversation");
         try {
             int localUserId = hostHolder.getUser().getId();
             List<ViewObject> conversations = new ArrayList<ViewObject>();
@@ -45,16 +49,17 @@ public class MessageController {
             for (Message msg : conversationList) {
                 ViewObject vo = new ViewObject();
                 vo.set("conversation", msg);
-                int targetId = msg.getFrom_id() == localUserId ? msg.getTo_id() : msg.getFrom_id();
+                int targetId = msg.getFromId() == localUserId ? msg.getToId() : msg.getFromId();
                 User user = userService.getUser(targetId);
                 vo.set("user", user);
-                vo.set("unread", messageService.getConvesationUnreadCount(localUserId, msg.getConversation_id()));
+                vo.set("unread", messageService.getConvesationUnreadCount(localUserId, msg.getConversationId()));
                 conversations.add(vo);
             }
-            model.addAttribute("conversations", conversations);
+                model.addAttribute("conversations", conversations);
         } catch (Exception e) {
             logger.error("获取站内信列表失败" + e.getMessage());
         }
+        System.out.println("Letter#########");
         return "letter";
     }
 
@@ -66,7 +71,7 @@ public class MessageController {
             for (Message msg : conversationList) {
                 ViewObject vo = new ViewObject();
                 vo.set("message", msg);
-                User user = userService.getUser(msg.getFrom_id());
+                User user = userService.getUser(msg.getFromId());
                 if (user == null) {
                     continue;
                 }
@@ -97,9 +102,9 @@ public class MessageController {
 
             Message msg = new Message();
             msg.setContent(content);
-            msg.setFrom_id(hostHolder.getUser().getId());
-            msg.setTo_id(user.getId());
-            msg.setCreated_date(new Date());
+            msg.setFromId(hostHolder.getUser().getId());
+            msg.setToId(user.getId());
+            msg.setCreatedDate(new Date());
             //msg.setConversationId(fromId < toId ? String.format("%d_%d", fromId, toId) : String.format("%d_%d", toId, fromId));
             messageService.addMessage(msg);
             return JsonUtil.getJSONString(0);
@@ -118,9 +123,9 @@ public class MessageController {
         try {
             Message msg = new Message();
             msg.setContent(content);
-            msg.setFrom_id(fromId);
-            msg.setTo_id(toId);
-            msg.setCreated_date(new Date());
+            msg.setFromId(fromId);
+            msg.setToId(toId);
+            msg.setCreatedDate(new Date());
             //msg.setConversationId(fromId < toId ? String.format("%d_%d", fromId, toId) : String.format("%d_%d", toId, fromId));
             messageService.addMessage(msg);
             return JsonUtil.getJSONString(msg.getId());

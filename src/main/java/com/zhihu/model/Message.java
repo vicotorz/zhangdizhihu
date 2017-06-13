@@ -3,29 +3,16 @@ package com.zhihu.model;
 import java.util.Date;
 
 /**
- * Created by dell on 2017/6/10.
+ * Created by nowcoder on 2016/7/9.
  */
 public class Message {
     private int id;
-    private int from_id;
-    private int to_id;
+    private int fromId;
+    private int toId;
     private String content;
-    private Date created_date;
-    private int has_read;
-    private String conversation_id;
-
-    public Message() {
-    }
-
-    public Message(int id, int from_id, int to_id, String content, Date created_date, int has_read, String conversation_id) {
-        this.id = id;
-        this.from_id = from_id;
-        this.to_id = to_id;
-        this.content = content;
-        this.created_date = created_date;
-        this.has_read = has_read;
-        this.conversation_id = conversation_id;
-}
+    private Date createdDate;
+    private int hasRead;
+    private String conversationId;
 
     public int getId() {
         return id;
@@ -35,20 +22,20 @@ public class Message {
         this.id = id;
     }
 
-    public int getFrom_id() {
-        return from_id;
+    public int getFromId() {
+        return fromId;
     }
 
-    public void setFrom_id(int from_id) {
-        this.from_id = from_id;
+    public void setFromId(int fromId) {
+        this.fromId = fromId;
     }
 
-    public int getTo_id() {
-        return to_id;
+    public int getToId() {
+        return toId;
     }
 
-    public void setTo_id(int to_id) {
-        this.to_id = to_id;
+    public void setToId(int toId) {
+        this.toId = toId;
     }
 
     public String getContent() {
@@ -59,27 +46,26 @@ public class Message {
         this.content = content;
     }
 
-    public Date getCreated_date() {
-        return created_date;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setCreated_date(Date created_date) {
-        this.created_date = created_date;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
-    public int getHas_read() {
-        return has_read;
+    public int getHasRead() {
+        return hasRead;
     }
 
-    public void setHas_read(int has_read) {
-        this.has_read = has_read;
+    public void setHasRead(int hasRead) {
+        this.hasRead = hasRead;
     }
 
-    public String getConversation_id() {
-        return conversation_id;
-    }
-
-    public void setConversation_id(String conversation_id) {
-        this.conversation_id = conversation_id;
+    public String getConversationId() {
+        if (fromId < toId) {
+            return String.format("%d_%d", fromId, toId);
+        }
+        return String.format("%d_%d", toId, fromId);
     }
 }
