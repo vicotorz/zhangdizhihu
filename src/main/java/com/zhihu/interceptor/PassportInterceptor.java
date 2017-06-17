@@ -38,9 +38,11 @@ public class PassportInterceptor implements HandlerInterceptor {
         String ticket = null;
         if (httpServletRequest.getCookies() != null) {
             for (Cookie cookie : httpServletRequest.getCookies()) {
-                if (cookie.getName().equals("ticket")) {
+                if (cookie.getName().equals("ticket")) {//ticket
                     //找到cookie中ticket字段
+                    System.out.println("找到ticket字段");
                     ticket = cookie.getValue();
+                    System.out.println("ticket值:" + ticket + " getVaule值 " + cookie.getValue());
                     break;
                 }
             }
@@ -48,11 +50,18 @@ public class PassportInterceptor implements HandlerInterceptor {
 
         if (ticket != null) {
             LoginTicket loginTicket = loginTicketDAO.SelectTicket(ticket);
-            if (loginTicket == null || loginTicket.getExpired().before(new Date()) || loginTicket.getStatus() != 0) {
+            if (loginTicket == null  || loginTicket.getStatus() != 0) {//|| loginTicket.getExpired().before(new Date())
+                //不存在ticket，status==1登录无效
                 //没有登录用户
+                // 0有效，1无效
+                System.out.println(loginTicket == null);
+                System.out.println(loginTicket.getExpired().before(new Date()));
+                System.out.println(loginTicket.getStatus() != 0);
+                System.out.println("没有登录用户");
                 return true;
             }
             //用户登录有效 将用户放入到上下文
+            System.out.println("登录有效，放入上下文");
             User user = userDAO.select(loginTicket.getUserId());
             hostHolder.setUser(user);
         }

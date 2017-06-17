@@ -94,9 +94,11 @@ public class LoginController {
             Map<String, Object> map = userService.login(username, password);
             if (map.containsKey("ticket")) {
                 System.out.println("找到ticket票");
+                System.out.println("加入cookie  信息:"+map.get("ticket").toString());
                 Cookie cookie = new Cookie("ticket", map.get("ticket").toString());
                 cookie.setPath("/");
                 if (rememberme) {
+                    System.out.println("记住我");
                     cookie.setMaxAge(3600 * 24 * 5);
                 }
                 response.addCookie(cookie);
