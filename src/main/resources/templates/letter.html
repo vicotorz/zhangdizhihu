@@ -3,9 +3,7 @@
 <div id="main">
     <div class="zg-wrap zu-main clearfix ">
         <ul class="letter-list">
-            #if($conversations)
-            有消息
-            #$conversations.size()
+            #if($conversations!=null)
             #foreach ($conversation in $conversations)
             <li id="conversation-item-10001_622873">
                 <a class="letter-link" href="/msg/detail?conversationId=$conversation.conversation.conversationId">
