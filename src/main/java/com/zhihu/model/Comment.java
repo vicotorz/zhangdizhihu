@@ -8,23 +8,13 @@ import java.util.Date;
 public class Comment {
     private int id;
     private String content;
-    private int user_id;
-    private int entity_id;
-    private int entity_type;
-    private Date created_date;
+    private int userid;
+    private int entityid;
+    private int entitytype;
+    private Date createddate;
     private int status;
 
     public Comment() {
-    }
-
-    public Comment(int id, String content, int user_id, int entity_id, int entity_type, Date created_date, int status) {
-        this.id = id;
-        this.content = content;
-        this.user_id = user_id;
-        this.entity_id = entity_id;
-        this.entity_type = entity_type;
-        this.created_date = created_date;
-        this.status = status;
     }
 
     public int getId() {
@@ -43,36 +33,36 @@ public class Comment {
         this.content = content;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserid() {
+        return userid;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserid(int userid) {
+        this.userid = userid;
     }
 
-    public int getEntity_id() {
-        return entity_id;
+    public int getEntityid() {
+        return entityid;
     }
 
-    public void setEntity_id(int entity_id) {
-        this.entity_id = entity_id;
+    public void setEntityid(int entityid) {
+        this.entityid = entityid;
     }
 
-    public int getEntity_type() {
-        return entity_type;
+    public int getEntitytype() {
+        return entitytype;
     }
 
-    public void setEntity_type(int entity_type) {
-        this.entity_type = entity_type;
+    public void setEntitytype(int entitytype) {
+        this.entitytype = entitytype;
     }
 
-    public Date getCreated_date() {
-        return created_date;
+    public Date getCreateddate() {
+        return createddate;
     }
 
-    public void setCreated_date(Date created_date) {
-        this.created_date = created_date;
+    public void setCreateddate(Date createddate) {
+        this.createddate = createddate;
     }
 
     public int getStatus() {

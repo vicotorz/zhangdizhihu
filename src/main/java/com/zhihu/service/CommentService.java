@@ -29,7 +29,6 @@ public class CommentService {
     HostHolder hostHolder;
 
 
-
     //增加评论
     public int addComment(Comment comment) {
         //Html过滤
@@ -40,8 +39,14 @@ public class CommentService {
     }
 
     //找出qid问题下的所有评论
-    public List getCommentsByEntity(int entity_id, int entity_type){
-        System.out.println(entity_id);
-         return commentDao.getCommentsByEntity(entity_id,entity_type);
+    public List<Comment> getCommentsByEntity(int entity_id, int entity_type) {
+        System.out.println("++++++查看List里面的内容++++++++");
+        List<Comment> list = commentDao.getCommentsByEntity(entity_id, entity_type);
+        for (int i = 0; i < list.size(); i++) {
+            Comment c = list.get(i);
+            System.out.println(c.getId() + "---" + c.getContent() + "---" + c.getEntityid() + "---" + c.getCreateddate() + "---"
+                    + c.getEntitytype() + "---" + c.getStatus()+"---"+c.getUserid());
+        }
+        return commentDao.getCommentsByEntity(entity_id, entity_type);
     }
 }

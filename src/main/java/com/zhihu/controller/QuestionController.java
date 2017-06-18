@@ -69,15 +69,28 @@ public class QuestionController {
         Question question = questionService.getById(qid);
         model.addAttribute("question", question);
         System.out.println("@@@%%%%%%"+qid+"%%%%%%%%%%%");
+
         List<Comment> commentList = commentService.getCommentsByEntity(qid, EntityType.ENTITY_QUESTION);
         List<ViewObject> vos = new ArrayList<>();
         for (Comment comment : commentList) {
             ViewObject vo = new ViewObject();
             vo.set("comment", comment);
-            vo.set("user", userService.getUser(comment.getUser_id()));
+
+//            private int id;
+//            private String content;
+//            private int user_id;
+//            private int entity_id;
+//            private int entity_type;
+//            private Date created_date;
+//            private int status;
+
+            //没有返回comment内容
+            System.out.println("评论内容"+comment.getContent()+"评论用户id"+comment.getUserid()+" 评论时间"+comment.getCreateddate());
+            System.out.println(comment.getEntityid()+"--"+comment.getEntitytype()+"--"+comment.getStatus());
+            vo.set("user", userService.getUser(comment.getUserid()));
             vos.add(vo);
         }
-        model.addAttribute("comments", vos);
+        model.addAttribute("voComments", vos);
 
         return "detail";
     }

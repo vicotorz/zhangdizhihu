@@ -25,7 +25,14 @@ public interface CommentDAO {
     @Delete({"delete comment where user_id=#{user_id}"})
     void deleteById(@Param("id") int id);
 
-    @Select({"select * from comment where entity_id=#{entity_id} and entity_type=#{entity_type}"})
+    @Select({"select id,content,user_id,entity_id,entity_type,created_date,status from comment where entity_id=#{entity_id} and entity_type=#{entity_type}"})
     List<Comment> getCommentsByEntity(@Param("entity_id") int entity_id, @Param("entity_type") int entity_type);
-
+//Comment定义
+//    private int id;
+//    private String content;
+//    private int user_id;
+//    private int entity_id;
+//    private int entity_type;
+//    private Date created_date;
+//    private int status;
 }

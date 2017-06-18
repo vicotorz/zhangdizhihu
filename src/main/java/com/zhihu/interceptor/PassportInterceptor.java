@@ -40,9 +40,9 @@ public class PassportInterceptor implements HandlerInterceptor {
             for (Cookie cookie : httpServletRequest.getCookies()) {
                 if (cookie.getName().equals("ticket")) {//ticket
                     //找到cookie中ticket字段
-                    System.out.println("找到ticket字段");
+                    //System.out.println("找到ticket字段");
                     ticket = cookie.getValue();
-                    System.out.println("ticket值:" + ticket + " getVaule值 " + cookie.getValue());
+                    //System.out.println("ticket值:" + ticket + " getVaule值 " + cookie.getValue());
                     break;
                 }
             }
@@ -57,11 +57,11 @@ public class PassportInterceptor implements HandlerInterceptor {
                 System.out.println(loginTicket == null);
                 System.out.println(loginTicket.getExpired().before(new Date()));
                 System.out.println(loginTicket.getStatus() != 0);
-                System.out.println("没有登录用户");
+                //System.out.println("没有登录用户");
                 return true;
             }
             //用户登录有效 将用户放入到上下文
-            System.out.println("登录有效，放入上下文");
+            //System.out.println("登录有效，放入上下文");
             User user = userDAO.select(loginTicket.getUserId());
             hostHolder.setUser(user);
         }
