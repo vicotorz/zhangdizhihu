@@ -41,7 +41,7 @@ public class MessageController {
 
     @RequestMapping(path = {"/msg/list"}, method = {RequestMethod.GET})
     public String conversationDetail(Model model) {
-        System.out.println("conversation");
+        System.out.println("msg/list======进入conversationDetail()方法");
         try {
             int localUserId = hostHolder.getUser().getId();
             List<ViewObject> conversations = new ArrayList<ViewObject>();
