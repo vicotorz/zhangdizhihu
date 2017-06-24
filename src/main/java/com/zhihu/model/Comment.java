@@ -6,13 +6,13 @@ import java.util.Date;
  * Created by dell on 2017/6/10.
  */
 public class Comment {
-    private int id;
-    private String content;
-    private int userid;
-    private int entityid;
-    private int entitytype;
+    private int id;//评论id
+    private String content;//评论内容
+    private int userid;//评论用户id
+    private int entityid;//--->questionId  & commentId
+    private int entitytype;//question & comment
     private Date createddate;
-    private int status;
+    private int status;//被删除状态
 
     public Comment() {
     }
