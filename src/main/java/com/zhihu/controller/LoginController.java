@@ -1,5 +1,9 @@
 package com.zhihu.controller;
 
+import com.zhihu.async.EventModel;
+import com.zhihu.async.EventProducer;
+import com.zhihu.async.EventType;
+import com.zhihu.model.EntityType;
 import com.zhihu.model.HostHolder;
 import com.zhihu.service.UserService;
 import org.apache.commons.lang.StringUtils;
@@ -27,19 +31,20 @@ public class LoginController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    EventProducer eventProducer;
 
 
-
-    @RequestMapping(path = {"/toReg/"}, method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(path = {"/toReg/"}, method = {RequestMethod.GET, RequestMethod.POST})
     public String toReg() {
         return "reg";
     }
 
-    @RequestMapping(path = {"/reg/", "/reg/*"}, method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(path = {"/reg/", "/reg/*"}, method = {RequestMethod.GET, RequestMethod.POST})
 //, method = {RequestMethod.POST,RequestMethod.GET}
-    public String reg(Model model, @RequestParam(value="regname") String username,
-                      @RequestParam(value="password") String password,
-                      @RequestParam(value="next",required = false) String next,
+    public String reg(Model model, @RequestParam(value = "regname") String username,
+                      @RequestParam(value = "password") String password,
+                      @RequestParam(value = "next", required = false) String next,
                       @RequestParam(value = "rememberme", defaultValue = "false") boolean rememberme,
                       HttpServletResponse response) {
         System.out.println("进入注册方法！");
@@ -76,7 +81,7 @@ public class LoginController {
     @RequestMapping(path = {"/reglogin"}, method = {RequestMethod.GET})
     public String regloginPage(Model model, @RequestParam(value = "next", required = false) String next) {
         model.addAttribute("next", next);
-        model.addAttribute("msg","请登录");
+        model.addAttribute("msg", "请登录");
         return "login";
     }
 
@@ -94,7 +99,7 @@ public class LoginController {
             Map<String, Object> map = userService.login(username, password);
             if (map.containsKey("ticket")) {
                 System.out.println("找到ticket票");
-                System.out.println("加入cookie  信息:"+map.get("ticket").toString());
+                System.out.println("加入cookie  信息:" + map.get("ticket").toString());
                 Cookie cookie = new Cookie("ticket", map.get("ticket").toString());
                 cookie.setPath("/");
                 if (rememberme) {
@@ -105,11 +110,21 @@ public class LoginController {
                 if (StringUtils.isNotBlank(next)) {
                     return "redirect:" + next;
                 }
+                //发送邮件
+                {
+                    EventModel event = new EventModel(EventType.LOGIN);
+                    event.setExt("username", username);
+                    event.setExt("email", "993610120@qq.com");
+                    event.setActorId((int) map.get("userId"));
+                    eventProducer.fireEvent(event);
+                }
+
+
                 System.out.println("重定位");
                 return "redirect:/";
             } else {
                 System.out.println("登录失败");
-                System.out.println("错误信息："+map.get("msg"));
+                System.out.println("错误信息：" + map.get("msg"));
                 model.addAttribute("msg", map.get("msg"));
                 return "redirect:/";
             }

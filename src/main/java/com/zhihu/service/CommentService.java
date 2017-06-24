@@ -49,4 +49,9 @@ public class CommentService {
         }
         return commentDao.getCommentsByEntity(entity_id, entity_type);
     }
+
+    //获得具体id的comment内容
+    public Comment getCommentById(int commentid){
+        return commentDao.getCommentById(commentid);
+    }
 }
