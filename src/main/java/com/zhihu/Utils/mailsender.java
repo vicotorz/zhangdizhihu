@@ -35,17 +35,17 @@ public class MailSender implements InitializingBean {
                                         String template, Map<String, Object> model) {
         try {
             String nick = MimeUtility.encodeText("Victorz知乎");
-            InternetAddress from = new InternetAddress(nick + "<470897951@qq.com>");
-            MimeMessage mimeMessage = mailSender.createMimeMessage();
+            InternetAddress from = new InternetAddress(nick+"<470897951@qq.com>");
+            MimeMessage mimeMessage = mailSender.createMimeMessage();//邮件征文
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
             String result = VelocityEngineUtils
-                    .mergeTemplateIntoString(velocityEngine, template, "UTF-8", model);
+                    .mergeTemplateIntoString(velocityEngine, template, "UTF-8", model);//渲染模版
             mimeMessageHelper.setTo(to);
             mimeMessageHelper.setFrom(from);
             mimeMessageHelper.setSubject(subject);
             mimeMessageHelper.setText(result, true);
             mailSender.send(mimeMessage);
-            System.out.println("发送邮件");
+            System.out.println("发送邮件ing");
             return true;
         } catch (Exception e) {
             logger.error("发送邮件失败" + e.getMessage());
@@ -57,10 +57,10 @@ public class MailSender implements InitializingBean {
     public void afterPropertiesSet() throws Exception {
         mailSender = new JavaMailSenderImpl();
         mailSender.setUsername("470897951@qq.com");
-        //nkjzckgegbagbgif
+        //cxlqenjpsucjcaae
         //bdgivhosrvkhbifc
-        mailSender.setPassword("bdgivhosrvkhbifc");
-        mailSender.setHost("smtp.exmail.qq.com");
+        mailSender.setPassword("cxlqenjpsucjcaae");
+        mailSender.setHost("smtp.qq.com");
         mailSender.setPort(465);
         mailSender.setProtocol("smtps");
         mailSender.setDefaultEncoding("utf8");

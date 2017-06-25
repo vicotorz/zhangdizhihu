@@ -72,12 +72,14 @@ public class EventConsumer implements InitializingBean,ApplicationContextAware {
                             //没有事件表示，存入
                             //识别该由哪个handler处理
                             EventModel eventModel = JSON.parseObject(message, EventModel.class);
+                            System.out.println("消费事件:"+eventModel.getActorId());
                             if (!config.containsKey(eventModel.getType())) {
                                 logger.error("不能识别事件");
                                 continue;
                             }
                             //获取这个事件的handler，进行事件的处理
                             for (EventHandler handler : config.get(eventModel.getType())) {
+                                System.out.println("处理事件:"+eventModel.getActorId());
                                 handler.doHandle(eventModel);
                             }
                         }

@@ -118,7 +118,7 @@ public class LoginController {
                     event.setActorId((int)map.get("userid"));
                     eventProducer.fireEvent(event);
                 }
-
+                System.out.println("邮件已经发送，重新跳转中...");
 
                 //System.out.println("重定位");
                 return "redirect:/";
