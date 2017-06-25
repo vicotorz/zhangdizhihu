@@ -1,5 +1,6 @@
 package com.zhihu.Utils;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import org.apache.velocity.app.VelocityEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +35,7 @@ public class MailSender implements InitializingBean {
                                         String template, Map<String, Object> model) {
         try {
             String nick = MimeUtility.encodeText("Victorz知乎");
-            InternetAddress from = new InternetAddress(nick + "<course@nowcoder.com>");
+            InternetAddress from = new InternetAddress(nick + "<470897951@qq.com>");
             MimeMessage mimeMessage = mailSender.createMimeMessage();
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
             String result = VelocityEngineUtils
@@ -44,6 +45,7 @@ public class MailSender implements InitializingBean {
             mimeMessageHelper.setSubject(subject);
             mimeMessageHelper.setText(result, true);
             mailSender.send(mimeMessage);
+            System.out.println("发送邮件");
             return true;
         } catch (Exception e) {
             logger.error("发送邮件失败" + e.getMessage());
@@ -54,8 +56,10 @@ public class MailSender implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         mailSender = new JavaMailSenderImpl();
-        mailSender.setUsername("course@nowcoder.com");
-        mailSender.setPassword("NKnk123");
+        mailSender.setUsername("470897951@qq.com");
+        //nkjzckgegbagbgif
+        //bdgivhosrvkhbifc
+        mailSender.setPassword("bdgivhosrvkhbifc");
         mailSender.setHost("smtp.exmail.qq.com");
         mailSender.setPort(465);
         mailSender.setProtocol("smtps");

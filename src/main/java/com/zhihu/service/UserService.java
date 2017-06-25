@@ -54,7 +54,7 @@ public class UserService {
 
     //验证用户功能
     public HashMap login(String name, String password) {
-        HashMap<String, String> map = new HashMap<>();
+        HashMap<String, Object> map = new HashMap<>();
         if (name.equals(" ") && password.equals(" ")) {
             return map;
         } else {
@@ -73,6 +73,7 @@ public class UserService {
                 System.out.println("登录成功");
                 String ticket = addLoginTicket(user.getId());
                 map.put("ticket", ticket);
+                map.put("userid", user.getId());
             }
             return map;
         }

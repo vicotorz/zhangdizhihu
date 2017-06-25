@@ -3,6 +3,7 @@ package com.zhihu.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
@@ -11,13 +12,14 @@ import java.util.List;
 /**
  * Created by dell on 2017/6/24.
  */
+@Service
 public class JedisAdapter implements InitializingBean {
     private static final Logger logger= LoggerFactory.getLogger(JedisAdapter.class);
     private JedisPool pool;
     private Jedis jedis;
     @Override
     public void afterPropertiesSet() throws Exception {
-        pool=new JedisPool("redis://localhost:6379/10");
+        pool=new JedisPool("redis://localhost:6379/2");
     }
 
     //Set添加
@@ -26,7 +28,7 @@ public class JedisAdapter implements InitializingBean {
             jedis = pool.getResource();
             return jedis.sadd(key,value);
         }catch(Exception e){
-            logger.error("Jedis异常"+e.getMessage());
+            logger.error("Jedis--sadd方法异常"+e.getMessage());
         }finally {
             if(jedis!=null){
                 jedis.close();
@@ -41,7 +43,7 @@ public class JedisAdapter implements InitializingBean {
             jedis=pool.getResource();
             return jedis.srem(key,value);
         }catch (Exception e){
-            logger.error("Jedis异常"+e.getMessage());
+            logger.error("Jedis--srem方法异常"+e.getMessage());
         }finally{
             if(jedis!=null){
                 jedis.close();
@@ -56,7 +58,7 @@ public class JedisAdapter implements InitializingBean {
             jedis=pool.getResource();
             return jedis.scard(key);
         }catch (Exception e){
-            logger.error("Jedis异常"+e.getMessage());
+            logger.error("Jedis--scard方法异常"+e.getMessage());
         }finally{
             if(jedis!=null){
                 jedis.close();
@@ -71,7 +73,7 @@ public class JedisAdapter implements InitializingBean {
             jedis=pool.getResource();
             return jedis.sismember(key,value);
         }catch (Exception e){
-            logger.error("Jedis异常"+e.getMessage());
+            logger.error("Jedis--sismember异常"+e.getMessage());
         }finally{
             if(jedis!=null){
                 jedis.close();
@@ -86,7 +88,7 @@ public class JedisAdapter implements InitializingBean {
             jedis=pool.getResource();
             return jedis.brpop(timeout,key);
         }catch (Exception e){
-            logger.error("Jedis异常"+e.getMessage());
+            logger.error("Jedis--brpop异常"+e.getMessage());
         }finally{
             if(jedis!=null){
                 jedis.close();
@@ -101,7 +103,7 @@ public class JedisAdapter implements InitializingBean {
             jedis=pool.getResource();
             return jedis.lpush(key,value);
         }catch (Exception e){
-            logger.error("Jedis异常"+e.getMessage());
+            logger.error("Jedis--lpush异常"+e.getMessage());
         }finally{
             if(jedis!=null){
                 jedis.close();

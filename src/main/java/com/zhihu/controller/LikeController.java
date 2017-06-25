@@ -1,7 +1,6 @@
 package com.zhihu.controller;
 
 import com.zhihu.Utils.JsonUtil;
-import com.zhihu.async.EventHandler;
 import com.zhihu.async.EventModel;
 import com.zhihu.async.EventProducer;
 import com.zhihu.async.EventType;
@@ -50,7 +49,7 @@ public class LikeController {
         event.setActorId(hostHolder.getUser().getId());//设置用户id
         event.setEntityId(commentId);//设置entity（评论）的id
         event.setEntityType(EntityType.ENTITY_COMMENT);//设置entity类型
-        event.setEntityOwnerId(comment.getEntityid());//设置？？？
+        event.setEntityOwnerId(comment.getEntityid());//设置//--->questionId  & commentId
         eventProducer.fireEvent(event);
 
         //public long like(int userId, int entityType, int entityId)

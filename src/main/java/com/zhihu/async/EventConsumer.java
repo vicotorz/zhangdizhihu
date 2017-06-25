@@ -10,6 +10,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +20,7 @@ import java.util.Map;
 /**
  * Created by dell on 2017/6/24.
  */
+@Service
 public class EventConsumer implements InitializingBean,ApplicationContextAware {
     private static final Logger logger = LoggerFactory.getLogger(EventConsumer.class);
     private ApplicationContext applicationContext;
@@ -59,22 +61,25 @@ public class EventConsumer implements InitializingBean,ApplicationContextAware {
             public void run() {
                 while (true){
                     String key= RedisKeyUtil.getEventQueueKey();
+
                     List<String> events=jedisAdapter.brpop(0,key);
-                    for(String message: events){
-                        //如果有则跳过
-                        if(message.equals(key)){
-                            continue;
-                        }
-                        //没有事件表示，存入
-                        //识别该由哪个handler处理
-                        EventModel eventModel = JSON.parseObject(message,EventModel.class);
-                        if(!config.containsKey(eventModel.getType())){
-                            logger.error("不能识别事件");
-                            continue;
-                        }
-                        //获取这个事件的handler，进行事件的处理
-                        for(EventHandler handler:config.get(eventModel.getType())){
-                            handler.doHandle(eventModel);
+                    if(!events.isEmpty()) {
+                        for (String message : events) {
+                            //如果有则跳过
+                            if (message.equals(key)) {
+                                continue;
+                            }
+                            //没有事件表示，存入
+                            //识别该由哪个handler处理
+                            EventModel eventModel = JSON.parseObject(message, EventModel.class);
+                            if (!config.containsKey(eventModel.getType())) {
+                                logger.error("不能识别事件");
+                                continue;
+                            }
+                            //获取这个事件的handler，进行事件的处理
+                            for (EventHandler handler : config.get(eventModel.getType())) {
+                                handler.doHandle(eventModel);
+                            }
                         }
                     }
                 }

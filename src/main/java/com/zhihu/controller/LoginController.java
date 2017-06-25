@@ -47,13 +47,13 @@ public class LoginController {
                       @RequestParam(value = "next", required = false) String next,
                       @RequestParam(value = "rememberme", defaultValue = "false") boolean rememberme,
                       HttpServletResponse response) {
-        System.out.println("进入注册方法！");
-        System.out.println("注册方法" + username + "--" + password);
+//        System.out.println("进入注册方法！");
+//        System.out.println("注册方法" + username + "--" + password);
         try {
             Map<String, Object> map = userService.register(username, password);
-            System.out.println("注册完毕");
+            //System.out.println("注册完毕");
             if (map.containsKey("ticket")) {
-                System.out.println("注册完找到了ticket票");
+                //System.out.println("注册完找到了ticket票");
                 Cookie cookie = new Cookie("ticket", map.get("ticket").toString());
                 cookie.setPath("/");
                 if (rememberme) {
@@ -65,7 +65,7 @@ public class LoginController {
                 }
                 return "redirect:/";
             } else {
-                System.out.println("注册失败");
+                //System.out.println("注册失败");
 
                 model.addAttribute("msg", map.get("msg"));
                 return "reg";
@@ -98,12 +98,12 @@ public class LoginController {
             System.out.println(username + "--" + password);
             Map<String, Object> map = userService.login(username, password);
             if (map.containsKey("ticket")) {
-                System.out.println("找到ticket票");
-                System.out.println("加入cookie  信息:" + map.get("ticket").toString());
+                //System.out.println("找到ticket票");
+                //System.out.println("加入cookie  信息:" + map.get("ticket").toString());
                 Cookie cookie = new Cookie("ticket", map.get("ticket").toString());
                 cookie.setPath("/");
                 if (rememberme) {
-                    System.out.println("记住我");
+                   // System.out.println("记住我");
                     cookie.setMaxAge(3600 * 24 * 5);
                 }
                 response.addCookie(cookie);
@@ -115,16 +115,16 @@ public class LoginController {
                     EventModel event = new EventModel(EventType.LOGIN);
                     event.setExt("username", username);
                     event.setExt("email", "993610120@qq.com");
-                    event.setActorId((int) map.get("userId"));
+                    event.setActorId((int)map.get("userid"));
                     eventProducer.fireEvent(event);
                 }
 
 
-                System.out.println("重定位");
+                //System.out.println("重定位");
                 return "redirect:/";
             } else {
-                System.out.println("登录失败");
-                System.out.println("错误信息：" + map.get("msg"));
+                //System.out.println("登录失败");
+               // System.out.println("错误信息：" + map.get("msg"));
                 model.addAttribute("msg", map.get("msg"));
                 return "redirect:/";
             }
@@ -145,7 +145,7 @@ public class LoginController {
     @ExceptionHandler
     @ResponseBody
     public String error(Exception e) {
-        System.out.println("发生异常！");
+        //System.out.println("发生异常！");
         e.printStackTrace();
         return "error" + e.getMessage();
     }
