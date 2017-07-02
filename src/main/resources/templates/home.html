@@ -1,56 +1,57 @@
-<br xmlns="http://www.w3.org/1999/html">
-<br>
-Hello Velocity
+<html>
+<body>
+<pre>
+    #*
+    你看不到我~~~~
+    *#
+    $!{value1}
+    $!{value2} ## 如果不存在，强制为空
+    ${value3}
 
-$!{value1}
-</br>
-colors:$!{colors}
-</br>
+    colors: $!{colors}
 
-#foreach($color in $colors)
-This color is : $color,$!{foreach.index}, $!{foreach.count}
-</br>
-#end
-</br>
+    #foreach($color in $colors)
+        This is Color $!{foreach.index}: $color, $!{foreach.count}
+    #end
 
+    #foreach($key in $map.keySet())
+        Number: $key, Value: $map.get($key)
+    #end
 
-#foreach($key in $map.keySet())
-Key:$!{key}-----Value:$map.get($key)
-</br>
-#end
-</br>
+    #foreach($kv in $map.entrySet())
+        Number: $kv.key, Value: $kv.value
+    #end
 
-$!{user.name}
-$!{user.getPassword()}
+    User:  $!{user.name}
+    $!{user.description}
+    $!{user.getDescription()}
 
-<!--设置变量-->
-#set($varible="这是变量")
-Varible:$!{varible}
-
-#parse("header.html")
-#include("tail.html")
-
-<!--宏定义-->
-#macro(render_color,$index,$color)
-Color Render Macro $index,$color
-#end
-<!--宏调用-->
-#foreach($color in $colors)
-#render_color($foreach.index,$color)
-#end
-
-#*
-注释而已
-*#
-
-#set($hello="hello")
-#set($helloworld1="$!{hello} world")
-$!hello
-$helloworld1
+    #set($title = "nowcoder_title")
+    Title: $!{title}
 
 
+    Parse: #parse("header.html")
+    Include: #include("header.html")
+
+    #macro (render_color, $index, $color)
+        Color Render Macro $index, $color
+    #end
+
+    #foreach($color in $colors)
+        #render_color($foreach.index, $color)
+    #end
+
+    #set($hello = "hello")
+    #set($helloworld1 = "$!{hello} world")
+    $!hello
+    $helloworld1
+    #set($helloworld2 = '$!{hello} world')
+    $helloworld2
 
 
 
+
+
+</pre>
 </body>
 </html>
