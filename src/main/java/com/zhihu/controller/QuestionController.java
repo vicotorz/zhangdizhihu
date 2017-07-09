@@ -94,7 +94,7 @@ public class QuestionController {
             vo.set("user", userService.getUser(comment.getUser_id()));
             vos.add(vo);
         }
-        model.addAttribute("comments", vos);
+        model.addAttribute("VOcomments", vos);
 
         //////////////////添加关注信息
         List<ViewObject> followUsers = new ArrayList<>();
