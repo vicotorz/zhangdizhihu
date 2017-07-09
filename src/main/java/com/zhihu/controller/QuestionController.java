@@ -3,6 +3,7 @@ package com.zhihu.controller;
 import com.zhihu.Utils.JsonUtil;
 import com.zhihu.model.*;
 import com.zhihu.service.CommentService;
+import com.zhihu.service.FollowService;
 import com.zhihu.service.QuestionService;
 import com.zhihu.service.UserService;
 import org.slf4j.Logger;
@@ -31,6 +32,9 @@ public class QuestionController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    FollowService followService;
 
     @Autowired
     HostHolder hostholeder;//上下文存入用户
@@ -68,7 +72,6 @@ public class QuestionController {
     public String questionDetail(Model model, @PathVariable("qid") int qid) {
         Question question = questionService.getById(qid);
         model.addAttribute("question", question);
-        System.out.println("@@@%%%%%%"+qid+"%%%%%%%%%%%");
 
         List<Comment> commentList = commentService.getCommentsByEntity(qid, EntityType.ENTITY_QUESTION);
         List<ViewObject> vos = new ArrayList<>();
@@ -85,13 +88,38 @@ public class QuestionController {
 //            private int status;
 
             //没有返回comment内容
-            System.out.println("评论内容"+comment.getContent()+"评论用户id"+comment.getUserid()+" 评论时间"+comment.getCreateddate());
-            System.out.println(comment.getEntityid()+"--"+comment.getEntitytype()+"--"+comment.getStatus());
-            vo.set("user", userService.getUser(comment.getUserid()));
+            System.out.println("评论信息");
+            System.out.println("评论内容" + comment.getContent() + "评论用户id" + comment.getUser_id() + " 评论时间" + comment.getCreated_date());
+            System.out.println(comment.getEntity_id() + "--" + comment.getEntity_type() + "--" + comment.getStatus());
+            vo.set("user", userService.getUser(comment.getUser_id()));
             vos.add(vo);
         }
-        model.addAttribute("voComments", vos);
+        model.addAttribute("comments", vos);
 
+        //////////////////添加关注信息
+        List<ViewObject> followUsers = new ArrayList<>();
+
+        //获得关注这个问题的用户信息--把关注的用户都找到-->再一个一个取出来
+        List<Integer> users = followService.getFollowers(EntityType.ENTITY_QUESTION, qid, 20);
+
+        for (Integer userId : users) {
+            ViewObject vo = new ViewObject();
+            User u = userService.getUser(userId);
+            if (u == null) {
+                continue;
+            }
+            vo.set("name", u.getName());
+            vo.set("headUrl", u.getHeadUrl());
+            vo.set("id", u.getId());
+            followUsers.add(vo);
+        }
+        model.addAttribute("followUsers", followUsers);
+        if (hostholeder.getUser() != null) {
+            //判断当前用户是不是关注了这个问题
+            model.addAttribute("followed", followService.isFollower(hostholeder.getUser().getId(), EntityType.ENTITY_QUESTION, qid));
+        } else {
+            model.addAttribute("followed", false);
+        }
         return "detail";
     }
 }

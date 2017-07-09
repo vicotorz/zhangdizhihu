@@ -1,6 +1,9 @@
 package com.zhihu.controller;
 
 import com.zhihu.Utils.JsonUtil;
+import com.zhihu.async.EventModel;
+import com.zhihu.async.EventProducer;
+import com.zhihu.async.EventType;
 import com.zhihu.model.*;
 import com.zhihu.service.CommentService;
 import com.zhihu.service.QuestionService;
@@ -38,6 +41,9 @@ public class CommentController {
     SensetiveService senService;
 
     @Autowired
+    EventProducer eventProducer;
+
+    @Autowired
     HostHolder hostholeder;//上下文存入用户
 
     @RequestMapping(value = "/addComment", method = {RequestMethod.POST})
@@ -52,13 +58,13 @@ public class CommentController {
             comment.setContent(content);
             User user = hostholeder.getUser();
             if (user == null) {
-                comment.setUserid(DEFAULT_USER_ID);
+                comment.setUser_id(DEFAULT_USER_ID);
             } else {
-                comment.setUserid(user.getId());
+                comment.setUser_id(user.getId());
             }
-            comment.setEntityid(questionId);
-            comment.setEntitytype(1);//1---question,2---comment
-            comment.setCreateddate(new Date());
+            comment.setEntity_id(questionId);
+            comment.setEntity_type(1);//1---question,2---comment
+            comment.setCreated_date(new Date());
             comment.setStatus(0);
 
             commentService.addComment(comment);
@@ -67,8 +73,15 @@ public class CommentController {
             int count=questionService.getCommentCount(questionId);
             questionService.increaseCommentCount(count+1,questionId);
 
+            //评论异步队列
+            EventModel model=new EventModel(EventType.COMMENT);
+            model.setActorId(comment.getUser_id());
+            model.setEntityId(questionId);
+            eventProducer.fireEvent(model);
+
         } catch (Exception e) {
             logger.error("添加评论失败", e.getMessage());
+            e.printStackTrace();
         }
 
         //不会写
