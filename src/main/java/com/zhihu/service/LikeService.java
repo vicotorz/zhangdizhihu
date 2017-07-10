@@ -17,6 +17,7 @@ public class LikeService {
     public long getLikeCount(int entityType, int entityId) {
         String likeKey = RedisKeyUtil.getLikeKey(entityType, entityId);
         //返回字符串LIKE:【$!(entityType)】:【$!(entityId)】
+        System.out.println();
         return jedisAdapter.scard(likeKey);
     }
 

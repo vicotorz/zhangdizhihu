@@ -58,13 +58,13 @@ public class CommentController {
             comment.setContent(content);
             User user = hostholeder.getUser();
             if (user == null) {
-                comment.setUser_id(DEFAULT_USER_ID);
+                comment.setUserid(DEFAULT_USER_ID);
             } else {
-                comment.setUser_id(user.getId());
+                comment.setUserid(user.getId());
             }
-            comment.setEntity_id(questionId);
-            comment.setEntity_type(1);//1---question,2---comment
-            comment.setCreated_date(new Date());
+            comment.setEntityid(questionId);
+            comment.setEntitytype(1);//1---question,2---comment
+            comment.setCreateddate(new Date());
             comment.setStatus(0);
 
             commentService.addComment(comment);
@@ -75,7 +75,7 @@ public class CommentController {
 
             //评论异步队列
             EventModel model=new EventModel(EventType.COMMENT);
-            model.setActorId(comment.getUser_id());
+            model.setActorId(comment.getUserid());
             model.setEntityId(questionId);
             eventProducer.fireEvent(model);
 

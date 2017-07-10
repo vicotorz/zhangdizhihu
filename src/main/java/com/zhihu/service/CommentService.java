@@ -44,8 +44,8 @@ public class CommentService {
         List<Comment> list = commentDao.getCommentsByEntity(entity_id, entity_type);
         for (int i = 0; i < list.size(); i++) {
             Comment c = list.get(i);
-            System.out.println(c.getId() + "---" + c.getContent() + "---" + c.getEntity_id() + "---" + c.getCreated_date() + "---"
-                    + c.getEntity_type() + "---" + c.getStatus()+"---"+c.getUser_id());
+            System.out.println(c.getId() + "---" + c.getContent() + "---" + c.getEntityid() + "---" + c.getCreateddate() + "---"
+                    + c.getEntitytype() + "---" + c.getStatus()+"---"+c.getUserid());
         }
         return commentDao.getCommentsByEntity(entity_id, entity_type);
     }

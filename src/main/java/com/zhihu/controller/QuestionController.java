@@ -2,10 +2,7 @@ package com.zhihu.controller;
 
 import com.zhihu.Utils.JsonUtil;
 import com.zhihu.model.*;
-import com.zhihu.service.CommentService;
-import com.zhihu.service.FollowService;
-import com.zhihu.service.QuestionService;
-import com.zhihu.service.UserService;
+import com.zhihu.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +23,12 @@ public class QuestionController {
 
     @Autowired
     QuestionService questionService;
+
+    @Autowired
+    HostHolder hostHolder;
+
+    @Autowired
+    LikeService likeService;
 
     @Autowired
     CommentService commentService;
@@ -78,20 +81,28 @@ public class QuestionController {
         for (Comment comment : commentList) {
             ViewObject vo = new ViewObject();
             vo.set("comment", comment);
-
-//            private int id;
-//            private String content;
-//            private int user_id;
-//            private int entity_id;
-//            private int entity_type;
-//            private Date created_date;
-//            private int status;
-
             //没有返回comment内容
             System.out.println("评论信息");
-            System.out.println("评论内容" + comment.getContent() + "评论用户id" + comment.getUser_id() + " 评论时间" + comment.getCreated_date());
-            System.out.println(comment.getEntity_id() + "--" + comment.getEntity_type() + "--" + comment.getStatus());
-            vo.set("user", userService.getUser(comment.getUser_id()));
+            System.out.println("评论内容:" + comment.getContent() + "评论用户id:" + comment.getUserid() + " 评论时间:" + comment.getCreateddate());
+            System.out.println(comment.getEntityid() + "--" + comment.getEntitytype() + "--" + comment.getStatus());
+
+//            private int id;//评论id
+//            private String content;//评论内容
+//            private int user_id;//评论用户id
+//            private int entity_id;//--->questionId  & commentId
+//            private int entity_type;//question & comment
+//            private Date created_date;
+//            private int status;//被删除状态
+            //////////////////////////////////添加点赞信息//////////////////
+            if (hostHolder.getUser() == null) {
+                vo.set("liked", 0);
+            } else {
+                vo.set("liked", likeService.getLikeStatus(hostHolder.getUser().getId(), EntityType.ENTITY_COMMENT, comment.getId()));
+            }
+
+            vo.set("likeCount", likeService.getLikeCount(EntityType.ENTITY_COMMENT, comment.getId()));
+
+            vo.set("user", userService.getUser(comment.getUserid()));
             vos.add(vo);
         }
         model.addAttribute("VOcomments", vos);

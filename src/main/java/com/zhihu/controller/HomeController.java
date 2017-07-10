@@ -1,8 +1,10 @@
 package com.zhihu.controller;
 
+import com.zhihu.model.EntityType;
 import com.zhihu.model.HostHolder;
 import com.zhihu.model.Question;
 import com.zhihu.model.ViewObject;
+import com.zhihu.service.FollowService;
 import com.zhihu.service.QuestionService;
 import com.zhihu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class HomeController {
     QuestionService questionService;
 
     @Autowired
+    FollowService followService;
+
+    @Autowired
     HostHolder hostHolder;//拦截器目的：构造随处可用的holder
 
     @RequestMapping({"/", "/index","/*"})
@@ -39,7 +44,10 @@ public class HomeController {
             ViewObject vo = new ViewObject();
             vo.set("question", question);
             vo.set("user", userService.getUser(question.getUserId()));
+            //添加点赞信息
+            vo.set("followCount", followService.getFollowerCount(EntityType.ENTITY_QUESTION, question.getId()));
             vos.add(vo);
+            //System.out.println("---日期---"+question.getCreatedDate());
         }
         model.addAttribute("vos", vos);
         return "index";

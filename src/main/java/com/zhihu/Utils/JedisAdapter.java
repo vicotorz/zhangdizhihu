@@ -23,7 +23,7 @@ public class JedisAdapter implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        pool = new JedisPool("redis://localhost:6379");
+        pool = new JedisPool("redis://localhost:6379/7");
         System.out.println("初始化jedispool");
     }
 
