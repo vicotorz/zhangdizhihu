@@ -4,9 +4,14 @@ package com.zhihu.async.handler;
 import com.zhihu.async.EventHandler;
 import com.zhihu.async.EventModel;
 import com.zhihu.async.EventType;
+import com.zhihu.dao.QuestionDAO;
+import com.zhihu.model.Comment;
 import com.zhihu.model.Message;
+import com.zhihu.model.Question;
 import com.zhihu.model.User;
+import com.zhihu.service.CommentService;
 import com.zhihu.service.MessageService;
+import com.zhihu.service.QuestionService;
 import com.zhihu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,6 +31,12 @@ public class LikeHandler implements EventHandler {
     @Autowired
     UserService userService;
 
+    @Autowired
+    QuestionService questionService;
+
+    @Autowired
+    CommentService commentService;
+
     @Override
     public void doHandle(EventModel model) {
         Message message = new Message();
@@ -33,8 +44,10 @@ public class LikeHandler implements EventHandler {
         message.setToId(model.getEntityOwnerId());
         message.setCreatedDate(new Date());
         User user = userService.getUser(model.getActorId());
+        Comment comment=commentService.getCommentById(model.getEntityId());
+        Question question=questionService.getById(comment.getEntityid());
         message.setContent("用户" + user.getName()
-                + "赞了你的评论,http://127.0.0.1:8080/question/" + model.getExt("questionId"));
+                + "赞了你在帖子："+question.getContent()+" 中的评论:\n"+comment.getContent());
 
         messageService.addMessage(message);
     }

@@ -3,7 +3,7 @@ package com.zhihu.model;
 import java.util.Date;
 
 /**
- * Created by nowcoder on 2016/7/9.
+ * Created by dell on 2016/7/9.
  */
 public class Message {
     private int id;
@@ -60,6 +60,10 @@ public class Message {
 
     public void setHasRead(int hasRead) {
         this.hasRead = hasRead;
+    }
+
+    public void setConversationId(String conversationId) {
+        this.conversationId = conversationId;
     }
 
     public String getConversationId() {
