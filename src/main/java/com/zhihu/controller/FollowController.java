@@ -6,10 +6,7 @@ import com.zhihu.async.EventModel;
 import com.zhihu.async.EventProducer;
 import com.zhihu.async.EventType;
 import com.zhihu.model.*;
-import com.zhihu.service.CommentService;
-import com.zhihu.service.FollowService;
-import com.zhihu.service.QuestionService;
-import com.zhihu.service.UserService;
+import com.zhihu.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +33,7 @@ public class FollowController {
 
     @Autowired
     UserService userService;
+
 
     @Autowired
     HostHolder hostHolder;
@@ -107,6 +105,7 @@ public class FollowController {
         info.put("name", hostHolder.getUser().getName());
         info.put("id", hostHolder.getUser().getId());
         info.put("count", followService.getFollowerCount(EntityType.ENTITY_QUESTION, questionId));
+        //addFeed 返回
         return JsonUtil.getJSONString(ret ? 0 : 1, info);
     }
 

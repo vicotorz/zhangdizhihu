@@ -1,12 +1,7 @@
 package com.zhihu.controller;
 
-import com.zhihu.model.EntityType;
-import com.zhihu.model.HostHolder;
-import com.zhihu.model.Question;
-import com.zhihu.model.ViewObject;
-import com.zhihu.service.FollowService;
-import com.zhihu.service.QuestionService;
-import com.zhihu.service.UserService;
+import com.zhihu.model.*;
+import com.zhihu.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +25,12 @@ public class HomeController {
 
     @Autowired
     FollowService followService;
+
+    @Autowired
+    CommentService commentService;
+
+    @Autowired
+    LikeService likeService;
 
     @Autowired
     HostHolder hostHolder;//拦截器目的：构造随处可用的holder
@@ -58,7 +59,22 @@ public class HomeController {
     @RequestMapping(path = {"/user/{userId}"}, method = {RequestMethod.GET, RequestMethod.POST})
     public String userIndex(Model model, @PathVariable("userId") int userId) {
         model.addAttribute("vos", getQuestions(userId, 0, 10));
-        return "index";
+
+        User user = userService.getUser(userId);
+        ViewObject vo = new ViewObject();
+        vo.set("user", user);
+        vo.set("commentCount", commentService.getUserCommentCount(userId));
+        vo.set("followerCount", followService.getFollowerCount(EntityType.ENTITY_USER, userId));
+        vo.set("followeeCount", followService.getFolloweeCount(userId, EntityType.ENTITY_USER));
+        if (hostHolder.getUser() != null) {
+            vo.set("followed", followService.isFollower(hostHolder.getUser().getId(), EntityType.ENTITY_USER, userId));
+        } else {
+            vo.set("followed", false);
+        }
+        //赞的个数
+        vo.set("likeCount", likeService.getLikeCount(EntityType.ENTITY_USER,user.getId()));
+        model.addAttribute("profileUser", vo);
+        return "profile";
     }
 
     private List<ViewObject> getQuestions(int userId, int offset, int limit) {

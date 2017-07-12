@@ -36,7 +36,7 @@
                                         /
                                         <a target="_blank" href="#" class="zg-link-gray-normal">${profileUser.commentCount} 回答</a>
                                         /
-                                        <a target="_blank" href="#" class="zg-link-gray-normal">548 赞同</a>
+                                        <a target="_blank" href="#" class="zg-link-gray-normal">${profileUser.likeCount} 赞同</a>
                                     </div>
                                 </div>
                             </div>
@@ -75,9 +75,9 @@
                                             <div class="question-description-plain zm-editable-content"></div>
                                         </div>
                                         <div class="expandable entry-body">
-                                            <div class="zm-item-vote">
-                                                <a class="zm-item-vote-count js-expand js-vote-count" href="javascript:;" data-bind-votecount="">${vo.followCount}</a></div>
-                                            <div class="zm-item-answer-author-info">
+                                            <!--<div class="zm-item-vote">-->
+                                                <!--<a class="zm-item-vote-count js-expand js-vote-count" href="javascript:;" data-bind-votecount="">${vo.followCount}</a></div>-->
+                                            <!--<div class="zm-item-answer-author-info">-->
                                                 <a class="author-link" data-tip="p$b$amuro1230" target="_blank" href="/user/$!{vo.user.id}">$!{vo.user.name}</a>
                                                 ，$data.format('yyyy-MM-dd HH:mm:ss', $!{vo.question.createdDate})</div>
                                             <div class="zm-item-vote-info" data-votecount="4168" data-za-module="VoteInfo">

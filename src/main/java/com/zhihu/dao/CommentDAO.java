@@ -32,7 +32,7 @@ public interface CommentDAO {
     @Select({"select * from comment where id=#{id}"})
     Comment getCommentById(@Param("id") int id);
 
-    @Select({"select count(id) from comment where userid=#{userId}"})
+    @Select({"select count(id) from comment where user_id=#{userId}"})
     int getUserCommentCount(int userId);
 
     //Comment定义

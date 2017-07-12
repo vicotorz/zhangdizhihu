@@ -36,6 +36,7 @@ public class FollowHandler implements EventHandler {
         message.setCreatedDate(new Date());
         User user = userService.getUser(model.getActorId());
 
+        //关注question
         if (model.getEntityType() == EntityType.ENTITY_QUESTION) {
             message.setContent("用户" + user.getName()
                     + "关注了你的问题,http://127.0.0.1:8080/question/" + model.getEntityId());

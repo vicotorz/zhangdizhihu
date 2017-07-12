@@ -68,8 +68,8 @@ public class FeedHandler implements EventHandler {
     @Override
     public void doHandle(EventModel model) {
         // 为了测试，把model的userId随机一下
-        Random r = new Random();
-        model.setActorId(1+r.nextInt(10));
+        // Random r = new Random();
+        //model.setActorId(1+r.nextInt(10));
 
         // 构造一个新鲜事
         Feed feed = new Feed();
@@ -95,6 +95,7 @@ public class FeedHandler implements EventHandler {
         }
     }
 
+    //支持评论和关注的处理
     @Override
     public List<EventType> getSupportEventTypes() {
         return Arrays.asList(new EventType[]{EventType.COMMENT, EventType.FOLLOW});
