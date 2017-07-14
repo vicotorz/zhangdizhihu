@@ -21,6 +21,7 @@ public class SensetiveService implements InitializingBean {
     private static final Logger logger = LoggerFactory.getLogger(SensetiveService.class);
     private static final String DEFAULT_REPLACEMENT = "***";
 
+    //Spring通过InitializingBean完成一个bean初始化后，对这个bean的回调工作
     @Override
     public void afterPropertiesSet() throws Exception {
         rootNode = new TrieNode();
@@ -44,8 +45,8 @@ public class SensetiveService implements InitializingBean {
     //树节点
     private class TrieNode {
         //词，词尾标志
-        private boolean end = false;
-        private Map<Character, TrieNode> subNodes = new HashMap<>();
+        private boolean end = false;//词尾
+        private Map<Character, TrieNode> subNodes = new HashMap<>();//词
 
         //向指定位置添加节点树
         void addSubNode(Character key, TrieNode node) {
@@ -92,7 +93,7 @@ public class SensetiveService implements InitializingBean {
             //没初始化
             if (node == null) {
                 node = new TrieNode();
-                tempNode.addSubNode(c, node);
+                tempNode.addSubNode(c, node);//没有初始化，将字符放进去
             }
 
             tempNode = node;
@@ -117,9 +118,12 @@ public class SensetiveService implements InitializingBean {
         TrieNode tempNode = rootNode;
         int base = 0;//指针1
         int forward = 0;//指针2
+
+        //这部分过滤词中的非中文部分
         while (forward < text.length()) {
             char c = text.charAt(forward);
             if (isSymbol(c)) {
+                //先把第一个字符加上
                 if (tempNode == rootNode) {
                     result.append(c);
                     base++;
@@ -130,19 +134,22 @@ public class SensetiveService implements InitializingBean {
             //找当前词在trie树中节点
             tempNode = tempNode.getSubNode(c);
 
+            //三种情况
+            //1、没有找到节点
+            //2、找到节点
+            //3、不确定现在是不是
             if (tempNode == null) {//没找到
                 //以begin开始的字符串不存在敏感词
                 result.append(text.charAt(base));
                 //跳到下一个字符开始测试
-                System.out.println(result);
+                //System.out.println(result);
                 forward = base + 1;
                 base = forward;
-
                 tempNode = rootNode;//回到树初始节点
             } else if (tempNode.isKeywordEnd()) {//找到
                 //找到敏感词
-                result.append(replacement);
-                System.out.println(result);
+                result.append(replacement);//替换
+                //System.out.println(result);
                 forward = forward + 1;
                 base = forward;
                 tempNode = rootNode;
