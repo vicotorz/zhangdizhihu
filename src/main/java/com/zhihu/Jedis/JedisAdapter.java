@@ -18,7 +18,8 @@ public class JedisAdapter {
     public static void main(String args[]) {
         Jedis jedis = new Jedis("redis://localhost:6379/1");
         jedis.flushDB();
-
+        
+        //Set
         jedis.set("hello", "world");
         print(1, jedis.get("hello"));
         jedis.rename("hello", "NEW");
@@ -34,6 +35,7 @@ public class JedisAdapter {
         jedis.decrBy("num", 10);
         print(4, jedis.get("num"));
 
+        //List
         String listName = "list";
         for (int i = 0; i < 10; ++i) {
             jedis.lpush(listName, "L" + String.valueOf(i));
@@ -49,6 +51,7 @@ public class JedisAdapter {
         print(5, jedis.linsert(listName, BinaryClient.LIST_POSITION.BEFORE, "L1", "Before-L1"));
         print(5, jedis.lrange(listName, 0, jedis.llen(listName)));
 
+        //Hset
         String userKey = "MUser";
         jedis.hset(userKey, "name", "Jim");
         jedis.hset(userKey, "age", "18");
