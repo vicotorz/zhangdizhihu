@@ -24,6 +24,7 @@
                                     <a title="$!{vo.user.name}" data-tip="p$t$amuro1230" class="zm-item-link-avatar" target="_blank" href="https://nowcoder.com/people/amuro1230">
                                         <img src="$!{vo.user.headUrl}" class="zm-item-img-avatar"></a>
                                 </div>
+
                                 <div class="feed-main">
                                     <div class="feed-content" data-za-module="AnswerItem">
                                         <meta itemprop="answer-id" content="389034">
@@ -34,8 +35,6 @@
                                             <div class="question-description-plain zm-editable-content"></div>
                                         </div>
                                         <div class="expandable entry-body">
-                                            <div class="zm-item-vote">
-                                                <a class="zm-item-vote-count js-expand js-vote-count" href="javascript:;" data-bind-votecount="">$!{vo.followCount}</a></div>
                                             <div class="zm-item-answer-author-info">
                                                 <a class="author-link" data-tip="p$b$amuro1230" target="_blank" href="/user/$!{vo.user.id}">$!{vo.user.name}</a>
                                                 ，$data.format('yyyy-MM-dd HH:mm:ss', $!{vo.question.createdDate})</div>
@@ -44,6 +43,8 @@
                                                     <a href="#" class="more text">
                                                         <span class="js-voteCount">4168</span>&nbsp;人赞同</a></span>
                                             </div>
+                                            <div class="zm-item-vote">
+                                                <a class="zm-item-vote-count js-expand js-vote-count" href="javascript:;" data-bind-votecount="">$!{vo.followCount}</a></div>
                                             <div class="zm-item-rich-text expandable js-collapse-body" data-resourceid="123114" data-action="/answer/content" data-author-name="李淼" data-entry-url="/question/19857995/answer/13174385">
                                                 <div class="zh-summary summary clearfix">${vo.question.content}</div>
                                             </div>
