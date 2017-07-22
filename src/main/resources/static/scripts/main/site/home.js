@@ -32,4 +32,16 @@
             });
         }
 
+    function fClickShare() {
+        var that = this;
+        PopupUpload.show({
+            listeners: {
+                done: function () {
+                    alert('share from home');
+                    window.location.reload();
+                }
+            }
+        });
+    }
+
 })(window);

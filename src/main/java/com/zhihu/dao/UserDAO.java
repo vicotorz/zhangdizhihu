@@ -26,5 +26,8 @@ public interface UserDAO {
     @Select({"select * from user where name=#{name}"})
     User selectByName(String name);
 
+    @Update({"update user set head_url=#{headUrl} where id=#{id}"})
+    void editImage(User user);
+
 
 }

@@ -108,6 +108,11 @@ public class UserService {
         return map;
     }
 
+    //更新用户头像
+    public void editImage(User user){
+        userDAO.editImage(user);
+    }
+
     //登出清空ticket
     public void logout(String ticket) {
         ticketDao.updateticket(ticket, 1);

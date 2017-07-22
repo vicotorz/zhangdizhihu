@@ -7,7 +7,8 @@
         // 事件代理
         events: {
             'click .js-like': fVote,
-            'click .js-dislike': fVote
+            'click .js-dislike': fVote,
+            'click .js-share': fClickShare
         }
     });
 
@@ -19,7 +20,17 @@
             listEl: $('.js-user-list')
         });
     }
-
+    function fClickShare() {
+        var that = this;
+        PopupUpload.show({
+            listeners: {
+                done: function () {
+                    alert('share from login');
+                    window.location.reload();
+                }
+            }
+        });
+    }
     function fVote(oEvent) {
         var that = this;
         var oEl = $(oEvent.currentTarget);
