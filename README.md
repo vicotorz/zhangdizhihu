@@ -6,9 +6,13 @@
 -solr配置
 
 1【managed-schema添加中文分词】
+
 2【managed-schema建立字段】
+
 3【solrconfig.xml加入jar包ext】
+
 4【solrconfig.xml加入导入数据库的request handler】
+
 5【添加solr-data-config.xml】
 
 -redis启动
