@@ -3,6 +3,12 @@
 -基于mysql数据库
 -springboot + velocity +mybatis+异步队列+邮件发送+timeline+七牛sdk+solr
 
+-mysql导出数据，导入数据
+
+1.导出-->mysqldump -uroot -p wenda > ....(sql文件位置)
+
+2.导入-->mysql -uroot -p wenda < ...(sql文件位置)
+
 -solr配置
 
 1【managed-schema添加中文分词】
