@@ -18,8 +18,11 @@
 -redis启动
 
 切换到目录 cd D:\Redis
+
 redis-server.exe redis.windows.conf
+
 另外启动一个cmd，切换目录
+
 redis-cli.exe -h 127.0.0.1 -p 6379
 
 
