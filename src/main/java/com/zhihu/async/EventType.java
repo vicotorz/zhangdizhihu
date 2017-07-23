@@ -11,7 +11,8 @@ public enum EventType {
     MAIL(3),
     ///////////////关注事件
     FOLLOW(4),
-    UNFOLLOW(5);
+    UNFOLLOW(5),
+    ADD_QUESTION(6);
 
     private int value;
     EventType(int value){this.value=value;}
