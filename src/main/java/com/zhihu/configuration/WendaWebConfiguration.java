@@ -9,7 +9,10 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
- * Created by nowcoder on 2016/7/3.
+ * Created by dell on 2016/7/25.
+ * 代理模式
+ * 所有监听器需要在这里进行注册
+ * addPathPatterns(...)写监听httprequest的路径
  */
 @Component
 public class WendaWebConfiguration extends WebMvcConfigurerAdapter {
@@ -22,7 +25,7 @@ public class WendaWebConfiguration extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(passportInterceptor);
+        registry.addInterceptor(passportInterceptor);//没有写监听路径
         registry.addInterceptor(loginRequiredInterceptor).addPathPatterns("/user/*");
         super.addInterceptors(registry);
     }

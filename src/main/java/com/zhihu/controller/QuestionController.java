@@ -25,7 +25,7 @@ public class QuestionController {
     QuestionService questionService;
 
     @Autowired
-    HostHolder hostHolder;
+    HostHolder hostHolder;//上下文存入用户
 
     @Autowired
     LikeService likeService;
@@ -39,8 +39,6 @@ public class QuestionController {
     @Autowired
     FollowService followService;
 
-    @Autowired
-    HostHolder hostholeder;//上下文存入用户
 
     @RequestMapping(value = "/question/add", method = {RequestMethod.POST})
     @ResponseBody
@@ -54,11 +52,11 @@ public class QuestionController {
             question.setCreatedDate(new Date());
             question.setCommentCount(0);
 
-            if (hostholeder.getUser() == null) {
+            if (hostHolder.getUser() == null) {
                 //匿名用过户
                 question.setUserId(JsonUtil.DEFAULT_USER_ID);
             } else {
-                question.setUserId(hostholeder.getUser().getId());
+                question.setUserId(hostHolder.getUser().getId());
             }
 
             if (questionService.addQuestion(question) > 0) {
@@ -125,9 +123,9 @@ public class QuestionController {
             followUsers.add(vo);
         }
         model.addAttribute("followUsers", followUsers);
-        if (hostholeder.getUser() != null) {
+        if (hostHolder.getUser() != null) {
             //判断当前用户是不是关注了这个问题
-            model.addAttribute("followed", followService.isFollower(hostholeder.getUser().getId(), EntityType.ENTITY_QUESTION, qid));
+            model.addAttribute("followed", followService.isFollower(hostHolder.getUser().getId(), EntityType.ENTITY_QUESTION, qid));
         } else {
             model.addAttribute("followed", false);
         }

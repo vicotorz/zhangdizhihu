@@ -42,7 +42,7 @@ public class LoginController {
 
     @RequestMapping(path = {"/reg/", "/reg/*"}, method = {RequestMethod.GET, RequestMethod.POST})
 //, method = {RequestMethod.POST,RequestMethod.GET}
-    public String reg(Model model, @RequestParam(value = "regname") String username,
+    public String reg(Model model, @RequestParam(value = "name") String username,
                       @RequestParam(value = "password") String password,
                       @RequestParam(value = "next", required = false) String next,
                       @RequestParam(value = "rememberme", defaultValue = "false") boolean rememberme,
