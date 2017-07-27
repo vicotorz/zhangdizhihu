@@ -42,7 +42,7 @@ public class FeedController {
     private String getPushFeeds(Model model) {
         int localUserId = hostHolder.getUser() != null ? hostHolder.getUser().getId() : 0;
         List<String> feedIds = jedisAdapter.lrange(RedisKeyUtil.getTimelineKey(localUserId), 0, 10);
-        List<Feed> feeds = new ArrayList<Feed>();
+        List<Feed> feeds = new ArrayList<Feed>();//返回给页面显示的feeds
         for (String feedId : feedIds) {
             Feed feed = feedService.getById(Integer.parseInt(feedId));
             if (feed != null) {
