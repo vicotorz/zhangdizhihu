@@ -135,9 +135,9 @@ public class SensetiveService implements InitializingBean {
             tempNode = tempNode.getSubNode(c);
 
             //三种情况
-            //1、没有找到节点
-            //2、找到节点
-            //3、不确定现在是不是
+            //1、没有找到节点    forward=base+1;base=forward;
+            //2、找到节点        forward=forward+1;base=farward;
+            //3、不确定现在是不是 ++forward;
             if (tempNode == null) {//没找到
                 //以begin开始的字符串不存在敏感词
                 result.append(text.charAt(base));
