@@ -14,7 +14,10 @@ public class EventModel {
     private int entityId;//entity的id
     private int entityOwnerId;//entity拥有者id
 
-    private Map<String, String> exts = new HashMap<String, String>();//????
+    //用户model的扩展属性字段
+    //比如：登录event中要存username和password
+    private Map<String, String> exts = new HashMap<String, String>();
+
 
     public EventModel() {
     }
