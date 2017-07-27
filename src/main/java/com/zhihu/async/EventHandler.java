@@ -9,6 +9,6 @@ public interface EventHandler {
     //处理handler方法
     void doHandle(EventModel model);
 
-    //获得支持的EventType类型
+    //注册获得支持的EventType类型
     List<EventType> getSupportEventTypes();
 }

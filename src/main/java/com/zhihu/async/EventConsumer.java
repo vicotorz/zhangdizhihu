@@ -40,14 +40,17 @@ public class EventConsumer implements InitializingBean,ApplicationContextAware {
         Map<String,EventHandler> beans=applicationContext.getBeansOfType(EventHandler.class);//设置完一个bean的所有合作者之后，对这个bean进行回调
         if(beans!=null){
             for(Map.Entry<String,EventHandler> entry:beans.entrySet()){//获取value
+                System.out.println("搞不懂"+entry.getKey()+"--"+entry.getValue());
                 //这个event所支持的类型
                 List<EventType> eventTypes=entry.getValue().getSupportEventTypes();
 
                 //---从上下文中获取
                 for(EventType type:eventTypes) {//获取type
+                    System.out.println("搞不懂"+type);
                     if(!config.containsKey(type)){
                         config.put(type,new ArrayList<EventHandler>());
                     }
+                    System.out.println("放进"+type+"--"+entry.getValue());
                     config.get(type).add(entry.getValue());
                 }
             }
@@ -66,9 +69,12 @@ public class EventConsumer implements InitializingBean,ApplicationContextAware {
                     if(!events.isEmpty()) {
                         for (String message : events) {
                             //如果有则跳过
+                            System.out.println(message+"----888=="+key);
+                            System.out.println(message.equals(key));
                             if (message.equals(key)) {
                                 continue;
                             }
+                            System.out.println("没有contains");
                             //没有事件表示，存入
                             //识别该由哪个handler处理
                             EventModel eventModel = JSON.parseObject(message, EventModel.class);

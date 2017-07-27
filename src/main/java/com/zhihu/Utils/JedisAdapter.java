@@ -19,12 +19,35 @@ import java.util.Set;
 public class JedisAdapter implements InitializingBean {
     private static final Logger logger = LoggerFactory.getLogger(JedisAdapter.class);
     private JedisPool pool;
-    private Jedis jedis;
 
     @Override
     public void afterPropertiesSet() throws Exception {
         pool = new JedisPool("redis://localhost:6379/7");
         System.out.println("初始化jedispool");
+    }
+
+    public Jedis getJedis() {
+        return pool.getResource();
+    }
+
+    //阻塞队列弹出元素
+    public List<String> brpop(int timeout, String key) {
+        Jedis jedis = null;
+        System.out.println("brpop方法调用");
+        try {
+            System.out.println("获得连接");
+            jedis = pool.getResource();
+            System.out.println("获得连接，brpop");
+            System.out.println(timeout+"--?--"+key);
+            return jedis.brpop(timeout, key);
+        } catch (Exception e) {
+            logger.error("Jedis--brpop异常" + e.getMessage());
+        } finally {
+            if (jedis != null) {
+                jedis.close();
+            }
+        }
+        return null;
     }
 
     //Set添加
@@ -93,24 +116,7 @@ public class JedisAdapter implements InitializingBean {
         return false;
     }
 
-    //阻塞队列弹出元素
-    public List<String> brpop(int timeout, String key) {
-        Jedis jedis = null;
-        System.out.println("brpop方法调用");
-        try {
-            System.out.println("获得连接");
-            jedis = pool.getResource();
-            System.out.println("获得连接，brpop");
-            return jedis.brpop(timeout, key);
-        } catch (Exception e) {
-            logger.error("Jedis--brpop异常" + e.getMessage());
-        } finally {
-            if (jedis != null) {
-                jedis.close();
-            }
-        }
-        return null;
-    }
+
 
     //List添加
     public long lpush(String key, String value) {
@@ -131,9 +137,7 @@ public class JedisAdapter implements InitializingBean {
     }
 
     ////////增加jedis事务操作
-    public Jedis getJedis() {
-        return pool.getResource();
-    }
+
 
     public Transaction multi(Jedis jedis) {
         try {

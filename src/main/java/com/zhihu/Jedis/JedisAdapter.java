@@ -51,7 +51,7 @@ public class JedisAdapter {
         print(5, jedis.linsert(listName, BinaryClient.LIST_POSITION.BEFORE, "L1", "Before-L1"));
         print(5, jedis.lrange(listName, 0, jedis.llen(listName)));
 
-        //Hset
+        //hset
         String userKey = "MUser";
         jedis.hset(userKey, "name", "Jim");
         jedis.hset(userKey, "age", "18");
@@ -95,7 +95,7 @@ public class JedisAdapter {
 
         print(7, jedis.scard(setName1));//?返回集合的元素个数
 
-        //Rankkey--【sorted set】
+        //sorted set
         String rankKey = "rank";
         jedis.zadd(rankKey, 15, "Jim");
         jedis.zadd(rankKey, 60, "Ben");
@@ -122,7 +122,7 @@ public class JedisAdapter {
         print(8, jedis.zrank(rankKey, "Ben"));//排名
         print(8, jedis.zrevrank(rankKey, "Ben"));
 
-        //优先权set--【sorted set】
+        //优先权sorted set
         String setKey = "zset";
         jedis.zadd(setKey, 1, "a");
         jedis.zadd(setKey, 1, "b");

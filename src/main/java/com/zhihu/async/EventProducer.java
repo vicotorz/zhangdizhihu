@@ -20,7 +20,7 @@ public class EventProducer {
     public boolean fireEvent(EventModel eventModel) {
         //序列化，入队
         String json = JSONObject.toJSONString(eventModel);
-        String key = RedisKeyUtil.getEventQueueKey();//返回BIZ_EVENTQUEUE;
+        String key = RedisKeyUtil.getEventQueueKey();//返回BIZ值为EVENTQUEUE;
         jedisAdapter.lpush(key, json);//加入的内容：BIZ_EVENTQUEUE ----对象序列化
         return true;
     }
