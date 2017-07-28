@@ -33,7 +33,7 @@ public class LikeService {
         return jedisAdapter.sismember(disLikeKey, String.valueOf(userId)) ? -1 : 0;
     }
 
-    //获取喜欢？？？
+    //点了赞，消除踩
     public long like(int userId, int entityType, int entityId) {
         String likeKey = RedisKeyUtil.getLikeKey(entityType, entityId);
         //返回字符串LIKE:【$!(entityType)】:【$!(entityId)】
@@ -45,7 +45,7 @@ public class LikeService {
 
         return jedisAdapter.scard(likeKey);
     }
-    //获得踩的？？？
+    //踩添加，赞消除
     public long disLike(int userId, int entityType, int entityId) {
         String disLikeKey = RedisKeyUtil.getDisLikeKey(entityType, entityId);
         jedisAdapter.sadd(disLikeKey, String.valueOf(userId));
