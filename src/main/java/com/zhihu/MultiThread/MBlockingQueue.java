@@ -5,10 +5,10 @@ import java.util.concurrent.BlockingQueue;
 
 public class MBlockingQueue {
 
-	// �ڲ�������
-	// �ڲ�������
-	// ����
-	// ������
+	// 内部生产者
+	// 内部消费者
+	// 容器
+	// 主函数
 
 	class Customer implements Runnable {
 		private BlockingQueue<String> queue;
@@ -20,10 +20,10 @@ public class MBlockingQueue {
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
-			// �����������Դ
+			// 队列里面放资源
 			try {
 				while (!queue.isEmpty()) {
-					System.out.println(Thread.currentThread().getName() + " ȡ������  " + queue.take().toString());
+					System.out.println(Thread.currentThread().getName() + " 取出蛋糕  " + queue.take().toString());
 				}
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -44,8 +44,8 @@ public class MBlockingQueue {
 		public void run() {
 			// TODO Auto-generated method stub
 			try {
-				// System.out.print("ȡ������");
-				System.out.println(Thread.currentThread().getName() + " ��������  ");
+				// System.out.print("取出蛋糕");
+				System.out.println(Thread.currentThread().getName() + " 生产蛋糕  ");
 				queue.put("cake");
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block

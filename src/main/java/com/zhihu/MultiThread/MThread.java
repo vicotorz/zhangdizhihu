@@ -1,8 +1,8 @@
 package com.zhihu.MultiThread;
 
 /***
- * 
- * ��д���ݣ� Thread Runnable Synchronized BlockingQueue(������--������) ThreadLocal
+ *
+ * 编写内容： Thread Runnable Synchronized BlockingQueue(生产者--消费者) ThreadLocal
  * Excutor Future
  **/
 public class MThread extends Thread {
@@ -21,11 +21,11 @@ public class MThread extends Thread {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
 	}
-	
-	//��дrun����
+
+	//重写run方法
 	@Override
 	public void run(){
 		say();
@@ -33,7 +33,7 @@ public class MThread extends Thread {
 
 	//Thread--start()
 	public static void main(String[] args) {
-		// �����߳�
+		// 创建线程
 		try {
 			for (int i = 0; i < 4; i++) {
 				new MThread(String.valueOf(i)).start();

@@ -4,7 +4,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class MExcutor {
-	// �����̳߳� execute() ָ����������
+	// 创建线程池 execute() 指定阻塞队列
 	public static void testExecutor() {
 		ExecutorService service = Executors.newSingleThreadExecutor();
 		service.submit(new Runnable() {
@@ -39,13 +39,13 @@ public class MExcutor {
 			}
 		});
 
-		// executor�Ĺر� shutdown shutdownNow
+		// executor的关闭 shutdown shutdownNow
 		service.shutdown();
-		// �۲�״̬
+		// 观察状态
 		while (!service.isTerminated()) {
 			try {
 				Thread.sleep(1000);
-				System.out.println("�ȴ��ر�");
+				System.out.println("等待关闭");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -2,7 +2,7 @@ package com.zhihu.MultiThread;
 
 /**
  * Synchronized
- * 
+ *
  */
 public class MSynchronized {
 	public String name;
@@ -13,7 +13,7 @@ public class MSynchronized {
 	}
 
 	public static void say() {
-		// ����������
+		// 方法区上锁
 		synchronized (o) {
 			try {
 				for (int j = 0; j < 3; j++) {
@@ -38,7 +38,7 @@ public class MSynchronized {
 
 	public static void main(String[] args) {
 
-		// ��������߳�--����ͬһ������
+		// 启动多个线程--访问同一个区域
 		for (int i = 0; i < 10; i++) {
 			new Thread(new Runnable() {
 				@Override

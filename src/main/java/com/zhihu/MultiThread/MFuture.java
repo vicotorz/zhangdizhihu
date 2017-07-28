@@ -10,7 +10,7 @@ public class MFuture {
 	public void testFuture() {
 		ExecutorService exe = Executors.newFixedThreadPool(10);
 		Future future = exe.submit(new Callable<Integer>() {
-			// callable��call()��������ֵ
+			// callable中call()方法返回值
 			public Integer call() throws Exception {
 				Thread.sleep(1000);
 				return 1;
