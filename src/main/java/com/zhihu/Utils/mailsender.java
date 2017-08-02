@@ -31,6 +31,24 @@ public class MailSender implements InitializingBean {
     @Autowired
     private VelocityEngine velocityEngine;
 
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        mailSender = new JavaMailSenderImpl();
+        mailSender.setUsername("470897951@qq.com");
+        //cxlqenjpsucjcaae
+        //bdgivhosrvkhbifc
+        mailSender.setPassword("cxlqenjpsucjcaae");
+        mailSender.setHost("smtp.qq.com");
+        mailSender.setPort(465);
+        mailSender.setProtocol("smtps");
+        mailSender.setDefaultEncoding("utf8");
+        Properties javaMailProperties = new Properties();
+        javaMailProperties.put("mail.smtp.ssl.enable", true);
+        //javaMailProperties.put("mail.smtp.auth", true);
+        //javaMailProperties.put("mail.smtp.starttls.enable", true);
+        mailSender.setJavaMailProperties(javaMailProperties);
+    }
+
     public boolean sendWithHTMLTemplate(String to, String subject,
                                         String template, Map<String, Object> model) {
         try {
@@ -53,21 +71,5 @@ public class MailSender implements InitializingBean {
         }
     }
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        mailSender = new JavaMailSenderImpl();
-        mailSender.setUsername("470897951@qq.com");
-        //cxlqenjpsucjcaae
-        //bdgivhosrvkhbifc
-        mailSender.setPassword("cxlqenjpsucjcaae");
-        mailSender.setHost("smtp.qq.com");
-        mailSender.setPort(465);
-        mailSender.setProtocol("smtps");
-        mailSender.setDefaultEncoding("utf8");
-        Properties javaMailProperties = new Properties();
-        javaMailProperties.put("mail.smtp.ssl.enable", true);
-        //javaMailProperties.put("mail.smtp.auth", true);
-        //javaMailProperties.put("mail.smtp.starttls.enable", true);
-        mailSender.setJavaMailProperties(javaMailProperties);
-    }
+
 }
