@@ -76,6 +76,8 @@ Redis启动问题
 
 【导出表和数据】
 mysqldump -uroot -p wenda > e:\test.sql
+【导入表和数据】
+mysqldump -uroot -p wenda < e:\test.sql
 
 【查看8080被占用】netstat  -aon|findstr "8080"
 cmd-->netstat -ano-->查看pid
