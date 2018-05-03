@@ -32,15 +32,15 @@ public class MThread extends Thread {
 	}
 
 	//Thread--start()
-	public static void main(String[] args) {
-		// 创建线程
-		try {
-			for (int i = 0; i < 4; i++) {
-				new MThread(String.valueOf(i)).start();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
+//	public static void main(String[] args) {
+//		// 创建线程
+//		try {
+//			for (int i = 0; i < 4; i++) {
+//				new MThread(String.valueOf(i)).start();
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//
+//	}
 }

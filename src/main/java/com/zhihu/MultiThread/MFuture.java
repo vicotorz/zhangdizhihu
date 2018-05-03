@@ -33,8 +33,8 @@ public class MFuture {
 
 	}
 
-	public static void main(String[] args) {
-		new MFuture().testFuture();
-	}
+//	public static void main(String[] args) {
+//		new MFuture().testFuture();
+//	}
 
 }

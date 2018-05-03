@@ -64,8 +64,8 @@ public class MBlockingQueue {
 
 	}
 
-	public static void main(String[] args) {
-		new MBlockingQueue().test();
-	}
+//	public static void main(String[] args) {
+//		new MBlockingQueue().test();
+//	}
 
 }

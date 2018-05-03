@@ -36,19 +36,19 @@ public class MSynchronized {
 
 	}
 
-	public static void main(String[] args) {
-
-		// 启动多个线程--访问同一个区域
-		for (int i = 0; i < 10; i++) {
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					say();
-
-				}
-			}).start();
-		}
-
-	}
+//	public static void main(String[] args) {
+//
+//		// 启动多个线程--访问同一个区域
+//		for (int i = 0; i < 10; i++) {
+//			new Thread(new Runnable() {
+//				@Override
+//				public void run() {
+//					say();
+//
+//				}
+//			}).start();
+//		}
+//
+//	}
 
 }

@@ -83,4 +83,14 @@ mysqldump -uroot -p wenda < e:\test.sql
 cmd-->netstat -ano-->查看pid
 -->结束进程
 
+【工程发布】
+
+(1)application继承SpringBootServletInitializer
+
+(2)pom.xml打包成war
+
+(3)mvn package -Dmaven.test.skip=true
+
+(4)去除多余main函数
+
 
