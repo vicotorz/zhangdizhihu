@@ -50,7 +50,7 @@ public class MessageController {
                 ViewObject vo = new ViewObject();
                 vo.set("message", msg);
                 int targetId = msg.getFromId() == localUserId ? msg.getToId() : msg.getFromId();
-                System.out.println(msg.getContent()+"--"+msg.getCreatedDate()+"--"+msg.getId());
+                //System.out.println(msg.getContent()+"--"+msg.getCreatedDate()+"--"+msg.getId());
                 User user = userService.getUser(targetId);
                 vo.set("user", user);
                 vo.set("unread", messageService.getConvesationUnreadCount(localUserId, msg.getConversationId()));
@@ -58,7 +58,7 @@ public class MessageController {
             }
                 model.addAttribute("conversations", conversations);
         } catch (Exception e) {
-            logger.error("获取站内信列表失败" + e.getMessage());
+            logger.error("获取站内信列表失败！" + e.getMessage());
         }
         //System.out.println("Letter#########");
         return "letter";

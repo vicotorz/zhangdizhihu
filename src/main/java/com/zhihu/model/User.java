@@ -12,9 +12,7 @@ public class User {
     private String password;
     private String salt;
     private String headUrl;
-    public User(){
-
-    }
+    public User(){}
 
     public User(int id, String name, String password, String salt, String headUrl) {
         this.id = id;
@@ -67,6 +65,5 @@ public class User {
     public User(String name, String password) {
         this.name = name;
         this.password = password;
-
     }
 }

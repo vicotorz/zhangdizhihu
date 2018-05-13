@@ -98,7 +98,6 @@ public class FollowService {
         }
         return ids;
     }
-
     /**
      *  判断用户是否关注了某个实体
      */
