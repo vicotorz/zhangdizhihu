@@ -16,6 +16,6 @@ public class SettingController {
     @RequestMapping(path = {"/setting"}, method = {RequestMethod.GET})
     @ResponseBody
     public String setting(HttpSession httpSession) {
-        return "Setting OK. ";
+        return "功能待开发中 ";
     }
 }

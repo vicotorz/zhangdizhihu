@@ -47,8 +47,6 @@ public class LoginController {
                       @RequestParam(value = "next", required = false) String next,
                       @RequestParam(value = "rememberme", defaultValue = "false") boolean rememberme,
                       HttpServletResponse response) {
-//        System.out.println("进入注册方法！");
-//        System.out.println("注册方法" + username + "--" + password);
         try {
             Map<String, Object> map = userService.register(username, password);
             //System.out.println("注册完毕");
@@ -66,7 +64,6 @@ public class LoginController {
                 return "redirect:/";
             } else {
                 //System.out.println("注册失败");
-
                 model.addAttribute("msg", map.get("msg"));
                 return "reg";
             }
@@ -95,7 +92,7 @@ public class LoginController {
             if ((" ").equals(username) && (" ").equals(password)) {
                 return "login";
             }
-            System.out.println(username + "--" + password);
+            //System.out.println(username + "--" + password);
             Map<String, Object> map = userService.login(username, password);
             if (map.containsKey("ticket")) {
                 //System.out.println("找到ticket票");
@@ -119,7 +116,6 @@ public class LoginController {
                     eventProducer.fireEvent(event);
                 }
                 System.out.println("邮件已经发送，重新跳转中...");
-
                 //System.out.println("重定位");
                 return "redirect:/";
             } else {
@@ -128,7 +124,6 @@ public class LoginController {
                 model.addAttribute("msg", map.get("msg"));
                 return "redirect:/";
             }
-
         } catch (Exception e) {
             logger.error("登陆异常" + e.getMessage());
             e.printStackTrace();
@@ -141,18 +136,15 @@ public class LoginController {
         userService.logout(ticket);
         return "redirect:/";
     }
-
+    ///cant_login
+    @RequestMapping(path = {"/cant_login"})//, method = {RequestMethod.GET, RequestMethod.POST}
+    public String cant_login(@CookieValue("ticket") String ticket) {
+        return "请联系管理员，功能开发中......";
+    }
     @ExceptionHandler
     @ResponseBody
     public String error(Exception e) {
-        //System.out.println("发生异常！");
         e.printStackTrace();
-        return "error" + e.getMessage();
+        return "程序内部发生错误！Error" + e.getMessage();
     }
-//    @RequestMapping(path={"/error"})
-//    @ResponseBody
-//    public void Error(Exception e){
-//        System.out.println(e.getStackTrace());
-//    }
-
 }

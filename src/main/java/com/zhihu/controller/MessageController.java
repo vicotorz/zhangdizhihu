@@ -41,7 +41,7 @@ public class MessageController {
 
     @RequestMapping(path = {"/msg/list"}, method = {RequestMethod.GET})
     public String conversationDetail(Model model) {
-        System.out.println("msg/list======进入conversationDetail()方法");
+        //System.out.println("msg/list======进入conversationDetail()方法");
         try {
             int localUserId = hostHolder.getUser().getId();
             List<ViewObject> conversations = new ArrayList<ViewObject>();
@@ -60,7 +60,7 @@ public class MessageController {
         } catch (Exception e) {
             logger.error("获取站内信列表失败" + e.getMessage());
         }
-        System.out.println("Letter#########");
+        //System.out.println("Letter#########");
         return "letter";
     }
 

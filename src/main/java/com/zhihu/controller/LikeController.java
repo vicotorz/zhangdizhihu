@@ -55,7 +55,6 @@ public class LikeController {
         //public long like(int userId, int entityType, int entityId)
         long likeCount = likeService.like(hostHolder.getUser().getId(), EntityType.ENTITY_COMMENT, commentId);
         return JsonUtil.getJSONString(0, String.valueOf(likeCount));
-
     }
 
     //点踩
@@ -68,6 +67,4 @@ public class LikeController {
         long likeCount = likeService.disLike(hostHolder.getUser().getId(), EntityType.ENTITY_COMMENT, commentId);
         return JsonUtil.getJSONString(0, String.valueOf(likeCount));
     }
-
-
 }

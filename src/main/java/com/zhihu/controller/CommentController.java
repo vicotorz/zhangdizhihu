@@ -83,7 +83,6 @@ public class CommentController {
             logger.error("添加评论失败", e.getMessage());
             e.printStackTrace();
         }
-
         //不会写
         return "redirect:/question/" + String.valueOf(questionId);
     }

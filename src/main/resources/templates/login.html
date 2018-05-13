@@ -40,13 +40,13 @@
                     <input type="hidden" name="next" value="$!{next}"/>
                     <div class="button-wrapper command clearfix">
                         <button class="sign-button submit" type="submit" onclick="form=document.getElementById('regloginform');form.action='/login/'">登录</button>
-                        <button class="sign-button submit" type="submit" onclick="form=document.getElementById('regloginform');form.action='/reg/'">注册</button>
+                        <button class="sign-button submit" onclick="window.location.href='/toReg/'">注册</button>
                     </div>
                     <div class="signin-misc-wrapper clearfix">
                         <label class="remember-me">
                             <input type="checkbox" name="rememberme" checked="" value="true"> 记住我
                         </label>
-                        <a class="unable-login" href="#">无法登录?</a>
+                        <a class="unable-login" href="/cant_login">无法登录?</a>
                     </div>
                 </form>
             </div>

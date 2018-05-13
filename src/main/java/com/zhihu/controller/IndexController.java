@@ -26,7 +26,7 @@ public class IndexController {
 
     @Autowired
     //@Qualifier("DAO")
-            UserDAO userDAO;
+    UserDAO userDAO;
 
     @RequestMapping({"/init"})
     @ResponseBody
@@ -38,9 +38,9 @@ public class IndexController {
             user.setName(String.format("USER%d,", i));
             user.setPassword("");
             user.setSalt("");
-            System.out.println("存入数据库");
+            //System.out.println("存入数据库");
             userDAO.addUser(user);
-            System.out.println("存完数据库");
+            //System.out.println("存完数据库");
         }
     }
 
@@ -62,7 +62,6 @@ public class IndexController {
         return "The page of" + id + " key:" + key + " value:" + type;
     }
 
-
     @RequestMapping(path = {"/request"})
     @ResponseBody
     public String request(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
@@ -71,7 +70,6 @@ public class IndexController {
         sb.append(request.getQueryString() + "<br>");
         sb.append(request.getPathInfo() + "<br>");
         sb.append(request.getRequestURI() + "<br>");
-
 
         Enumeration<String> headerNames = request.getHeaderNames();
         while (headerNames.hasMoreElements()) {

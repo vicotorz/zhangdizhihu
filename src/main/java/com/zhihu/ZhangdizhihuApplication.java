@@ -17,6 +17,4 @@ public class ZhangdizhihuApplication extends SpringBootServletInitializer {
     public static void main(String[] args) {
         SpringApplication.run(ZhangdizhihuApplication.class, args);
     }
-
-
 }
