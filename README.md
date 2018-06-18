@@ -1,5 +1,6 @@
 # 仿知乎论坛社区网站-问答系统
-### 使用技术：mysql，springboot，velocity，mybatis，redis，异步队列，邮件发送，timeline，七牛sdk，solr 
+### 使用技术：
+#### mysql，springboot，velocity，mybatis，redis，异步队列，邮件发送，timeline，七牛sdk，solr 
 
 # 知识点总结
 ## mysql导出数据，导入数据
@@ -55,4 +56,5 @@ implements InitializingBean
 >
 Dao内找不到变量--因为@Param没有加
 >
-*@Select List<xx>查不到(model里面属性有下划线，去掉下划线就好了)==>针对comment
+@Select List<xx>查不到(model里面属性有下划线，去掉下划线就好了)==>针对comment
+>
