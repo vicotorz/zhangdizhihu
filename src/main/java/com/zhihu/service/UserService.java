@@ -15,7 +15,7 @@ import java.util.Random;
 import java.util.UUID;
 
 /**
- * Created by dell on 2017/5/23.
+ * Created by victorz on 2017/5/23.
  */
 @Service
 public class UserService {

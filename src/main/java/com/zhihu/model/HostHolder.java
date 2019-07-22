@@ -3,7 +3,7 @@ package com.zhihu.model;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by nowcoder on 2016/7/3.
+ * Created by victorz on 2016/7/3.
  */
 @Component
 public class HostHolder {

@@ -3,7 +3,7 @@ package com.zhihu.model;
 import java.util.Date;
 
 /**
- * Created by dell on 2016/7/9.
+ * Created by victorz on 2016/7/9.
  */
 public class Message {
     private int id;

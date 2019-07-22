@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 /**
- * Created by nowcoder on 2016/7/9.
+ * Created by victorz on 2016/7/9.
  */
 @Mapper
 public interface MessageDAO {

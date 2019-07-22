@@ -14,7 +14,7 @@ import java.util.UUID;
 import java.util.logging.Logger;
 
 /**
- * Created by dell on 2017/7/22.
+ * Created by victorz on 2017/7/22.
  */
 @Service
 public class QiniuService {

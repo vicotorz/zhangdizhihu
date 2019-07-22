@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 /**
- * Created by nowcoder on 2016/7/2.
+ * Created by victorz on 2016/7/2.
  */
 @Controller
 public class LoginController {

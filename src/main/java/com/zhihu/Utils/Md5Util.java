@@ -1,12 +1,17 @@
 package com.zhihu.Utils;
 
 /**
- * Created by dell on 2017/5/28.
+ * Created by victorz on 2017/5/28.
  */
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Md5Util {
+    private static final Logger logger = LoggerFactory.getLogger(Md5Util.class);
+
     public static final String MD5(String src) {
         //char[] hexDigits = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 
@@ -39,7 +44,7 @@ public class Md5Util {
 
             return strBuff.toString();
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         return src;
     }

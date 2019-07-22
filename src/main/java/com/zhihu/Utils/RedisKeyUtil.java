@@ -1,7 +1,7 @@
 package com.zhihu.Utils;
 
 /**
- * Created by dell on 2017/6/24.
+ * Created by victorz on 2017/6/24.
  */
 public class RedisKeyUtil {
 
@@ -15,8 +15,6 @@ public class RedisKeyUtil {
     // 关注对象
     private static String BIZ_FOLLOWEE = "FOLLOWEE";
     private static String BIZ_TIMELINE = "TIMELINE";
-
-
 
     //得到喜欢的串
     public static String getLikeKey(int entityType, int entityId) {
@@ -47,6 +45,5 @@ public class RedisKeyUtil {
     public static String getTimelineKey(int userId) {
         return BIZ_TIMELINE + SPLIT + String.valueOf(userId);
     }
-
-
+    
 }

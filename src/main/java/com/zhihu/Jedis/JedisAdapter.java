@@ -8,7 +8,7 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Tuple;
 
 /**
- * Created by dell on 2017/6/18.
+ * Created by victorz on 2017/6/18.
  */
 public class JedisAdapter {
     public static void print(int i, Object j) {

@@ -3,7 +3,7 @@ package com.zhihu.model;
 import java.util.Date;
 
 /**
- * Created by dell on 2017/6/10.
+ * Created by victorz on 2017/6/10.
  */
 public class Comment {
     private int id;//评论id

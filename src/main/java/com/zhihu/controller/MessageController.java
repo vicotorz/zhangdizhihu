@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by nowcoder on 2016/7/9.
+ * Created by victorz on 2016/7/9.
  */
 @Controller
 public class MessageController {

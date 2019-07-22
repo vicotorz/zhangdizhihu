@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 
 /**
- * Created by nowcoder on 2016/7/10.
+ * Created by victorz on 2016/7/10.
  */
 @Controller
 public class SettingController {

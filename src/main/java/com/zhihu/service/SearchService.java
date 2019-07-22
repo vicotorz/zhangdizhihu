@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by dell on 2017/7/23.
+ * Created by victorz on 2017/7/23.
  * 搜索服务--调用solr
  */
 @Service
@@ -64,8 +64,6 @@ public class SearchService {
         return resultList;
     }
 
-
-
     //2.建立索引
     //问题索引
     public boolean indexQuestion(int qid, String title, String content) throws Exception {
@@ -85,6 +83,7 @@ public class SearchService {
 //        UpdateResponse response = client.add(doc, 1000);
 //        return response != null && response.getStatus() == 0;
 //    }
+
 //   //用户索引
 //    public boolean indexUser(int uid, String name) throws Exception {
 //        SolrInputDocument doc =  new SolrInputDocument();
@@ -93,6 +92,4 @@ public class SearchService {
 //        UpdateResponse response = client.add(doc, 1000);
 //        return response != null && response.getStatus() == 0;
 //    }
-
-
 }

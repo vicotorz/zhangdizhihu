@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.*;
 
 
 /**
- * Created by dell on 2017/5/28.
+ * Created by victorz on 2017/5/28.
  */
 @Mapper
 public interface TicketDAO {

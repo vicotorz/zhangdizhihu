@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * Created by dell on 2016/7/15.
+ * Created by victorz on 2016/7/15.
  * // course@nowcoder.com NKnk66
  * 服务邮箱
  */
@@ -63,13 +63,11 @@ public class MailSender implements InitializingBean {
             mimeMessageHelper.setSubject(subject);
             mimeMessageHelper.setText(result, true);
             mailSender.send(mimeMessage);
-            System.out.println("发送邮件ing");
+            logger.info("发送邮件ing");
             return true;
         } catch (Exception e) {
             logger.error("发送邮件失败" + e.getMessage());
             return false;
         }
     }
-
-
 }

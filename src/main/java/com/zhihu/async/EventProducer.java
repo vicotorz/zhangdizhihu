@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * Created by dell on 2017/6/24.
+ * Created by victorz on 2017/6/24.
  */
 @Service
 public class EventProducer {

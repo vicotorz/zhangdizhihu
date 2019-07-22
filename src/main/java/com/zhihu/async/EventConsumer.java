@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by dell on 2017/6/24.
+ * Created by victorz on 2017/6/24.
  */
 @Service
 public class EventConsumer implements InitializingBean,ApplicationContextAware {
@@ -56,7 +56,6 @@ public class EventConsumer implements InitializingBean,ApplicationContextAware {
             }
         }
 
-
         //开启处理线程
         //启动处理线程
         Thread thread=new Thread(new Runnable() {
@@ -69,7 +68,7 @@ public class EventConsumer implements InitializingBean,ApplicationContextAware {
                     if(!events.isEmpty()) {
                         for (String message : events) {
                             //如果有则跳过
-                            System.out.println(message+"----888=="+key);
+                            System.out.println(message+"---"+key);
                             System.out.println(message.equals(key));
                             if (message.equals(key)) {
                                 continue;

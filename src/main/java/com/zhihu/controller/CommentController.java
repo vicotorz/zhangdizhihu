@@ -25,7 +25,7 @@ import java.util.List;
 import static com.zhihu.Utils.JsonUtil.DEFAULT_USER_ID;
 
 /**
- * Created by dell on 2017/6/10.
+ * Created by victorz on 2017/6/10.
  */
 @Controller
 public class CommentController {

@@ -22,7 +22,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by dell on 2017/7/23.
+ * Created by victorz on 2017/7/23.
  */
 @Controller
 public class SearchController {

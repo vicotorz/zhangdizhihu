@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Service;
 
 /**
- * Created by dell on 2017/5/20.
+ * Created by victorz on 2017/5/20.
  */
 @Mapper
 public interface UserDAO {

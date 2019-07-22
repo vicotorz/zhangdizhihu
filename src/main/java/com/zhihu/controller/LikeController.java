@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.swing.text.html.parser.Entity;
 
 /**
- * Created by dell on 2017/6/24.
+ * Created by victorz on 2017/6/24.
  * 不需要dao层，只需要handler放入队列即可
  */
 @Controller

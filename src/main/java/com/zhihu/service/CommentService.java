@@ -14,7 +14,7 @@ import org.springframework.web.util.HtmlUtils;
 import java.util.List;
 
 /**
- * Created by dell on 2017/5/23.
+ * Created by victorz on 2017/5/23.
  */
 @Service
 public class CommentService {
@@ -39,11 +39,11 @@ public class CommentService {
 
     //找出qid问题下的所有评论
     public List<Comment> getCommentsByEntity(int entity_id, int entity_type) {
-        System.out.println("++++++查看List里面的内容++++++++");
+        logger.info("++++++查看List里面的内容++++++++");
         List<Comment> list = commentDao.getCommentsByEntity(entity_id, entity_type);
         for (int i = 0; i < list.size(); i++) {
             Comment c = list.get(i);
-            System.out.println(c.getId() + "---" + c.getContent() + "---" + c.getEntityid() + "---" + c.getCreateddate() + "---"
+            logger.info(c.getId() + "---" + c.getContent() + "---" + c.getEntityid() + "---" + c.getCreateddate() + "---"
                     + c.getEntitytype() + "---" + c.getStatus()+"---"+c.getUserid());
         }
         return commentDao.getCommentsByEntity(entity_id, entity_type);

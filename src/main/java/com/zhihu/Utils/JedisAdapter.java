@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Created by dell on 2017/6/24.
+ * Created by victorz on 2017/6/24.
  */
 @Service
 public class JedisAdapter implements InitializingBean {
@@ -23,7 +23,7 @@ public class JedisAdapter implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         pool = new JedisPool("redis://localhost:6379/7");
-        System.out.println("初始化jedispool");
+        logger.info("初始化jedispool");
     }
 
     public Jedis getJedis() {
@@ -33,12 +33,12 @@ public class JedisAdapter implements InitializingBean {
     //阻塞队列弹出元素
     public List<String> brpop(int timeout, String key) {
         Jedis jedis = null;
-        System.out.println("brpop方法调用");
+        logger.info("brpop方法调用");
         try {
-            System.out.println("获得连接");
+            logger.info("获得连接");
             jedis = pool.getResource();
-            System.out.println("获得连接，brpop");
-            System.out.println(timeout+"--?--"+key);
+            logger.info("获得连接，brpop");
+            logger.info(timeout+"--?--"+key);
             return jedis.brpop(timeout, key);
         } catch (Exception e) {
             logger.error("Jedis--brpop异常" + e.getMessage());
@@ -85,7 +85,7 @@ public class JedisAdapter implements InitializingBean {
     //Set弹出
     public long scard(String key) {
         Jedis jedis = null;
-        System.out.println("scard");
+        logger.info("scard");
         try {
             jedis = pool.getResource();
             return jedis.scard(key);
@@ -120,12 +120,11 @@ public class JedisAdapter implements InitializingBean {
     public long lpush(String key, String value) {
         Jedis jedis = null;
         try {
-            System.out.println(key + "---" + value);
+            logger.info(key + "---" + value);
             jedis = pool.getResource();
             return jedis.lpush(key, value);
         } catch (Exception e) {
             logger.error("Jedis--lpush异常" + e.getMessage());
-            e.printStackTrace();
         } finally {
             if (jedis != null) {
                 jedis.close();
@@ -135,8 +134,6 @@ public class JedisAdapter implements InitializingBean {
     }
 
     ////////增加jedis事务操作
-
-
     public Transaction multi(Jedis jedis) {
         try {
             return jedis.multi();

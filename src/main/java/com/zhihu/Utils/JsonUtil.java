@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import java.util.Map;
 
 /**
- * Created by dell on 2017/6/5.
+ * Created by victorz on 2017/6/5.
  */
 public class JsonUtil {
     public static final int DEFAULT_USER_ID=2568;

@@ -3,7 +3,7 @@ package com.zhihu.model;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by dell on 2017/5/16.
+ * Created by victorz on 2017/5/16.
  */
 @Component
 public class User {

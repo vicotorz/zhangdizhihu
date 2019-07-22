@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
- * Created by dell on 2016/7/25.
+ * Created by victorz on 2016/7/25.
  * 代理模式
  * 所有监听器需要在这里进行注册
  * addPathPatterns(...)写监听httprequest的路径

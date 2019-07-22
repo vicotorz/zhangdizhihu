@@ -4,9 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by dell on 2017/6/24.
+ * Created by victorz on 2017/6/24.
  */
-//
 public class EventModel {
     private EventType type;//Event类型
     private int actorId;//执行的用户id

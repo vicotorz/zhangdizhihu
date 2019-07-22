@@ -1,7 +1,7 @@
 package com.zhihu.async;
 
 /**
- * Created by dell on 2017/6/24.
+ * Created by victorz on 2017/6/24.
  */
 //定义队列EventType
 public enum EventType {

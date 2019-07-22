@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
 /**
- * Created by dell on 2016/7/3.
+ * Created by victorz on 2016/7/3.
  * 提交的用户识别
  */
 @Component
