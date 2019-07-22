@@ -70,9 +70,7 @@ public class QiniuService {
         } catch (QiniuException e) {
             // 请求失败时打印的异常的信息
             logger.error("七牛异常:" + e.getMessage());
-            e.printStackTrace();
             return null;
         }
     }
-
 }

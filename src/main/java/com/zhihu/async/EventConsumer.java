@@ -101,6 +101,4 @@ public class EventConsumer implements InitializingBean,ApplicationContextAware {
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext=applicationContext;
     }
-
-
 }

@@ -28,7 +28,6 @@ public class CommentService {
     @Autowired
     HostHolder hostHolder;
 
-
     //增加评论
     public int addComment(Comment comment) {
         //Html过滤

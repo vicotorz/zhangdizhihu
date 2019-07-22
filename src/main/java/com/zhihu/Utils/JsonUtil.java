@@ -23,7 +23,6 @@ public class JsonUtil {
         return json.toJSONString();
     }
 
-    //放入大量
     public static String getJSONString(int code, Map<String, Object> map) {
         JSONObject json = new JSONObject();
         json.put("code", code);

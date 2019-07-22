@@ -103,7 +103,6 @@ public class SensetiveService implements InitializingBean {
                 //关键词结束，设置结束标志
                 tempNode.setKeywordEnd(true);
             }
-
         }
     }
 
@@ -157,11 +156,11 @@ public class SensetiveService implements InitializingBean {
                 //一直向前探索
                 ++forward;
             }
-
         }
         result.append(text.substring(base));
         return result.toString();
     }
+
 //    public static void main(String[] argv) {
 //        SensetiveService s = new SensetiveService();
 //        s.addWord("色情");
@@ -169,5 +168,4 @@ public class SensetiveService implements InitializingBean {
 //        System.out.print(s.filter("你好色情"));
 //        System.out.print(s.filter("我好爱情"));
 //    }
-
 }

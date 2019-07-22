@@ -102,7 +102,7 @@ public class JedisAdapter implements InitializingBean {
     //Set是否是一个成员
     public boolean sismember(String key, String value) {
         Jedis jedis = null;
-        System.out.println("sismember方法调用");
+        logger.info("sismember方法调用");
         try {
             jedis = pool.getResource();
             return jedis.sismember(key, value);
@@ -115,8 +115,6 @@ public class JedisAdapter implements InitializingBean {
         }
         return false;
     }
-
-
 
     //List添加
     public long lpush(String key, String value) {
@@ -249,5 +247,4 @@ public class JedisAdapter implements InitializingBean {
         }
         return null;
     }
-
 }

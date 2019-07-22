@@ -4,6 +4,7 @@ package com.zhihu.Utils;
  * Created by dell on 2017/6/24.
  */
 public class RedisKeyUtil {
+
     private static String SPLIT = ":";
     private static String BIZ_LIKE = "LIKE";
     private static String BIZ_DISLIKE = "DISLIKE";

@@ -35,14 +35,12 @@ public class Md5Util {
                     strBuff.append("0");
                 }
                 strBuff.append(Integer.toHexString(val));
-//              strBuff.append(hexDigits[val%16]);
             }
 
             return strBuff.toString();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-
         return src;
     }
 }

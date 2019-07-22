@@ -18,6 +18,7 @@ import java.util.UUID;
 public class ImageService {
     private static final Logger logger = LoggerFactory.getLogger(ImageService.class);
     public static String[] IMAGE_FILE_EXTD = new String[] {"png", "bmp", "jpg", "jpeg"};
+    private final String file_Path="D:/upload/";
     //存入图片
     public String saveImage(MultipartFile file) throws IOException{
         //xxx.jpg  获取文件名
@@ -36,7 +37,7 @@ public class ImageService {
 
         //存入图片--存入策略
         Files.copy(file.getInputStream(),
-                new File("D:/upload/"+fileName).toPath(), StandardCopyOption.REPLACE_EXISTING);
+                new File(file_Path+fileName).toPath(), StandardCopyOption.REPLACE_EXISTING);
         return "http://127.0.0.1:8080/image?name="+ fileName;
     }
 
